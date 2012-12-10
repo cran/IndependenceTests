@@ -90,9 +90,11 @@ for (i in 2:length(dna)) x2 <- paste(x2, dna[i], sep = "")
 x <- unlist(strsplit(x2, ""))
 x[x=="a"|x=="g"] <- "r"
 x[x=="c"|x=="t"] <- "y"
-out=A.dep.tests(x,choice=2,d=1501,m=2)$TA[[1]]
+\donttest{
+out <- A.dep.tests(x,choice=2,d=1501,m=2)$TA[[1]]
 plot(100:1500,out[100:1500],xlab="lag j",ylab="T(1,j+1)",pch=19)
 abline(h=qchisq(.995,df=1))
+}
 
 # Analysis of a contingency table in Agresti (2002) p. 322 
 

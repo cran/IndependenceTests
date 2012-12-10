@@ -3,3 +3,14 @@
 
 Version 0.1 : First version of package IndependenceTests
 
+2012-12-10
+----------
+
+Version 0.2:
+- I added a NAMESPACE file
+- I removed file zzz.R
+- I commented out a "cout" call in file normeRnAwR.cpp
+- I modified the files A-dep-tests.Rd and dependogram.Rd by adding some \donttest{} blocks.
+
+
+

@@ -708,7 +708,7 @@ extern "C" {
 	  
 	 
 	  //Affichage d'un compteur à l'écran
-	  if (*(compt+0) != 0) {*(compt+0)=*(compt+0)-1; cout << "\n" << *(compt+0);}
+	  //	  if (*(compt+0) != 0) {*(compt+0)=*(compt+0)-1; cout << "\n" << *(compt+0);}
 
 	  
 	  // Pour chaque k dans A (for k = 1; k<= cardA; k++), on calcule la permutation associée à x=*(permvecd+cardA-k) en utilisant l'équivalent C++ de 

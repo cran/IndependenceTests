@@ -94,7 +94,9 @@ X1 <- cbind(W[1,],W[2,])
 X2 <- cbind(W[3,],W[4,])
 X3 <- cbind(W[5,],W[6,])
 X <- cbind(X1,X2,X3)
+\donttest{
 dependogram(X,vecd.ou.p=c(2,2,2),N=10,B=20,alpha=0.05,display=TRUE,graphics=TRUE)
+}
 
 % Example 4.3: Four-dependent variables which are 2-independent and 3-independent
 n <- 100
@@ -118,6 +120,7 @@ n <- 75
 U <- matrix(rnorm(2*n),nrow=n,ncol=2)
 W <- U[1:(n-1),] + sqrt(2)*U[2:n,]
 Y <- W/apply(W,MARGIN=1,FUN=function(x) sqrt(x[1]^2+x[2]^2))
+\donttest{
 dependogram(Y,vecd.ou.p=3,N=10,B=20,alpha=0.05,display=TRUE,graphics=TRUE)
-
+}
 }
