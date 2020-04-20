@@ -1,26 +1,27 @@
-dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics=TRUE,nbclus=1) {
+dependogram <- function(X,vecd.or.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics=TRUE,nbclus=1) {
 
 
   if (nbclus>1) {
 
-    suppressWarnings(pkg.present <- require(snow))
-    if (!pkg.present) stop("Package snow is not installed!")
-    suppressWarnings(pkg.present <- require(rsprng))
-    if (!pkg.present) stop("Package rsprng is not installed!")
-    suppressWarnings(pkg.present <- require(Rmpi))
-    if (!pkg.present) stop("Package Rmpi is not installed!")
+#    suppressWarnings(parallel.pkg.present <- require(parallel))
+      parallel.pkg.present <- "package:parallel" %in% search()
+      Rmpi.pkg.present <- "package:Rmpi" %in% search()
+    if (all(!c(parallel.pkg.present,Rmpi.pkg.present))) stop("Either package parallel or Rmpi should be installed!")
+#    suppressWarnings(rsprng.pkg.present <- require(rsprng))
+#    if (!rsprng.pkg.present) stop("Package rsprng is not installed!")
+    cluster.type <- if (parallel.pkg.present) "PSOCK" else "MPI" # We prefer to use "PSOCK" (i.e. parallel) because it's easier.
     
   }
 
 
   X <- as.matrix(X)
 
-# si length(vecd.ou.p)>1 alors cas non sériel sinon cas sériel
+# if length(vecd.or.p)>1 then serial case, otherwise non serial case
 
-  if (length(vecd.ou.p) > 1) {
-# on fait le cas non sériel
+  if (length(vecd.or.p) > 1) {
+# we perform the serial case
     seriel <- 0
-    vecd <- vecd.ou.p
+    vecd <- vecd.or.p
     p <- length(vecd)
     taille <- 2^p-p-1
 #
@@ -30,31 +31,21 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
     RnAs <- rep(0,2^p-p-1)
     Rn <- 0
 
-# On charge la fonction C dans la mémoire
-#	     dyn.load(paste("dependogram", .Platform$dynlib.ext, sep=""))
-
-# Remarque: quand on passe une matrice dans la fonction .C elle est reçue comme un vecteur obtenu en concaténant les colonnes de cette matrice
-# et le résultat est lui aussi renvoyé sous la forme d'un tel vecteur
-
-
-
-
-# On démarre la grappe de calculs
+# We start the cluster
     if (nbclus > 1) {
 
       B <- round(B/nbclus)*nbclus
       
 
-      cl <- makeCluster(nbclus, type = "MPI") 
-      clusterSetupSPRNG(cl)
+      cl <- parallel::makeCluster(nbclus, type = cluster.type) 
                                         
       
       myfunc <- function(B,p) {
         RnAsstar <- matrix(0,nrow=(2^p-p-1),ncol=B)
         Rnstar <- rep(0,B)
         require(IndependenceTests)
-# On appelle la fonction C dependogram
-        .C("dependogram",
+# We call the C function dependogram
+        .C("dependogramC",
            as.integer(N),
            as.integer(vecd),
            as.integer(length(vecd)),
@@ -72,12 +63,12 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
         
       }
       
-      out2 <- clusterCall(cl, myfunc, round(B/nbclus),p)
+      out2 <- parallel::clusterCall(cl, myfunc, round(B/nbclus),p)
       
                    
       
-      # On arrete la grappe de calcul
-      stopCluster(cl)
+      # We stop the cluster
+      parallel::stopCluster(cl)
 
       out <- list(RnAs=c(),RnAsstar=c(),Rn=c(),Rnstar=c())
 
@@ -98,8 +89,8 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
       RnAsstar <- matrix(0,nrow=(2^p-p-1),ncol=B)
       Rnstar <- rep(0,B)
 
-# On appelle la fonction C dependogram
-      out <- .C("dependogram",
+# We call the C function dependogram
+      out <- .C("dependogramC",
 		as.integer(N),
 		as.integer(vecd),
 		as.integer(length(vecd)),
@@ -120,9 +111,6 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
 
 
 
-# On décharge la fonction C de la mémoire
-#		dyn.unload(paste("dependogram", .Platform$dynlib.ext, sep=""))
-
 
 
     if (display) {
@@ -142,17 +130,17 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
     }
     
 
-# Ordonne les éléments de chaque ligne
+# Sort the elements on each line
     RnAsstar <- matrix(out$RnAsstar,nrow=(2^p-p-1),ncol=B,byrow=FALSE)
     matseuils <- t(apply(RnAsstar,FUN=sort,MARGIN=1))
 
 
     beta <- (1-alpha)^(1/taille)
-# Contient les beta-quantiles des stats RnA pour chacun des des 2^p-p-1 ensembles A
+# Contains the beta-quantiles of the stats RnA for each one of the 2^p-p-1 set A
     AllThresholds <- matseuils[,round(beta*B)]
 
     if (graphics) {
-# On trace une barre verticale pour chaque A de hauteur ||RnA||
+# We draw a vertical bar for each A with height ||RnA||
       plot(out$RnAs,type="h",ylim=c(0,max(c(max(AllThresholds),max(out$RnAs),max(out$Rnstar)))+0.1),xlim=c(0,2^p-p),main="Dependogram",xlab="Subsets",ylab="||RnA||")
     }
 
@@ -162,7 +150,7 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
 
 
     if (graphics) { 
-# On met une étoile pour chaque beta-quantile de ||R_A||
+# We put a star for each beta-quantile of ||R_A||
       points((1:(2^p-p-1)),AllThresholds,pch="*")
     }
 
@@ -174,10 +162,10 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
 
 
 
-  if (length(vecd.ou.p) == 1) {
-# on fait le cas sériel
+  if (length(vecd.or.p) == 1) {
+# We perform the serial case
     seriel <- 1
-    p <- vecd.ou.p
+    p <- vecd.or.p
     vecd <- rep(ncol(X),p)
     taille <- 2^(p-1)-1
 
@@ -187,16 +175,8 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
     SnAs <- rep(0,taille)
     Sn <- 0
 
-# On charge la fonction C dans la mémoire
-#	     dyn.load(paste("dependogram", .Platform$dynlib.ext, sep=""))
 
-# Remarque: quand on passe une matrice dans la fonction .C elle est reçue comme un vecteur obtenu en concaténant les colonnes de cette matrice
-# et le résultat est lui aussi renvoyé sous la forme d'un tel vecteur
-
-
-
-
-# On démarre la grappe de calculs
+# We start the cluster
     if (nbclus > 1) {
       
       B <- round(B/nbclus)*nbclus
@@ -204,16 +184,15 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
       SnAsstar <- matrix(0,nrow=taille,ncol=B)
       Snstar <- rep(0,B)
       
-      cl <- makeCluster(nbclus, type = "MPI") 
-      clusterSetupSPRNG(cl)
+      cl <- parallel::makeCluster(nbclus, type = cluster.type) 
                                         
       
       myfunc <- function(B,p) {
         SnAsstar <- matrix(0,nrow=(2^p-p-1),ncol=B)
         Snstar <- rep(0,B)
         require(IndependenceTests)
-# On appelle la fonction C dependogram
-        .C("dependogram",
+# We call the C function dependogram
+        .C("dependogramC",
            as.integer(N),
            as.integer(vecd),
            as.integer(length(vecd)),
@@ -230,12 +209,12 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
            as.integer(seriel),PACKAGE="IndependenceTests")
       }
       
-      out2 <- clusterCall(cl, myfunc, round(B/nbclus),p)
+      out2 <- parallel::clusterCall(cl, myfunc, round(B/nbclus),p)
       
                                         
       
-      # On arrete la grappe de calcul
-      stopCluster(cl)
+      # We stop the cluster
+      parallel::stopCluster(cl)
 
       out <- list(SnAs=c(),SnAsstar=c(),Sn=c(),Snstar=c())
       
@@ -255,8 +234,8 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
 
       SnAsstar <- matrix(0,nrow=taille,ncol=B)
       Snstar <- rep(0,B)
-# On appelle la fonction C dependogram
-      out <- .C("dependogram",
+# We call the C function dependogram
+      out <- .C("dependogramC",
 		as.integer(N),
 		as.integer(vecd),
 		as.integer(length(vecd)),
@@ -278,8 +257,6 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
 
 
 
-# On décharge la fonction C de la mémoire
-#		dyn.unload(paste("dependogram", .Platform$dynlib.ext, sep=""))
 
 
     if (display) {
@@ -306,15 +283,15 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
     beta <- (1-alpha)^(1/taille)
 
 
-# Le beta-quantile de S_n,A est calculé en amalgamant toutes les
-# valeurs  S_n,A^* avec |A|=k comme dans l'article
-# Il y a choose(p-1,|A|-1) ensembles A de taille |A| qui contiennent 1
-# Il faut donc prendre dans la matrice SnAsstar des paquets de choose(p-1,|A|-1) lignes, pour |A|=2 to p.
-# Il y aura p-1 paquets.
-# Pour chacun de ces paquets, on crée un vecteur vecA en prenant tous les éléments du paquet, 
-# puis on calcule AllThresholds[|A|]<-vecA[round(beta*B*choose(p-1,|A|-1))] pour |A|=2 to p
-# Ce vecteur AllThresholds contiendra donc les hauteurs des barres horizontales à placer sur le dependogram (une barre horizontale 
-# pour chaque |A|)
+# The beta-quantile of S_n,A is computed by grouping all the values 
+# S_n,A^* with |A|=k as in the article
+# There are choose(p-1,|A|-1) sets A of size |A| containing 1
+# We therefore must take in the matrix SnAsstar groups of choose(p-1,|A|-1) rows, for |A|=2 to p.
+# There will be p-1 groups.
+# For each one of these groups, we create a vector vecA by taking all the elements in the group, 
+# then we compute AllThresholds[|A|]<-vecA[round(beta*B*choose(p-1,|A|-1))] for |A|=2 to p
+# This vector AllThresholds will thus contain the heights of the horizontal bars to put on the dependogram (one horizontal bar 
+# for each |A|)
 
 
     AllThresholds <- rep(0,p-1)
@@ -329,7 +306,7 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
     }
 
     if (graphics) {
-# On trace une barre verticale pour chaque A de hauteur ||SnA||
+# We draw a vertical bar for each A of height ||SnA||
       plot(out$SnAs,type="h",ylim=c(0,max(c(max(AllThresholds),max(out$SnAs),max(out$Snstar)))+0.1),xlim=c(0,2^(p-1)),main="Dependogram",xlab="Subsets",ylab="||SnA||")
     }
     
@@ -338,7 +315,7 @@ dependogram <- function(X,vecd.ou.p,N=10,B=2000,alpha=0.05,display=TRUE,graphics
 # abline(h=GlobalThreshold,col="red")
 
 
-# Il reste à placer les lignes horizontales des seuils critiques pour chaque |A|
+# It remains to put the horizontal lines of the threshold values for each |A|
 
 
     if (graphics) {

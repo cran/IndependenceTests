@@ -44,32 +44,32 @@ Exemples:
 ---------
 
 N<-10
-vecd.ou.p<-c(3,2)
+vecd.or.p<-c(3,2)
 X<-matrix(c(0.7,0.4,0.1,0.8,0.4,0.13,3.7,0.4,2.1,1.8,0.1,0.1,0.7,0.2,0.1),byrow=F,nrow=3)
-x<-Sys.time();normeRnAwR(X,vecd.ou.p,N);Sys.time()-x
+x<-Sys.time();normeRnAwR(X,vecd.or.p,N);Sys.time()-x
 
 N<-5
-vecd.ou.p<-c(3,2,6)
+vecd.or.p<-c(3,2,6)
 X<-matrix(c(0.7,0.4,0.1,0.8,0.4,0.13,3.7,0.4,2.1,1.8,0.1,0.1,0.7,0.2,0.1,0.45,0.2,0.1,2,3.4,5.6,1.2,0.8,2.6,6.4,1.1,2.2,3.3,4.1,2.5,1.9,2.7,3.5),byrow=F,ncol=11)
-x<-Sys.time();normeRnAwR(X,vecd.ou.p,N,compt=0,affiche=1,seriel=0);Sys.time()-x
+x<-Sys.time();normeRnAwR(X,vecd.or.p,N,compt=0,affiche=1,seriel=0);Sys.time()-x
 #On peut aussi donner un décompte, mais cela rallonge beaucoup le temps de calcul ...
-x<-Sys.time();normeRnAwR(X,vecd.ou.p,N,compt=1,affiche=1,seriel=0);Sys.time()-x
+x<-Sys.time();normeRnAwR(X,vecd.or.p,N,compt=1,affiche=1,seriel=0);Sys.time()-x
 
 
 source("normeRnAwR.R")
 N<-5
-vecd.ou.p<-4
+vecd.or.p<-4
 X<-matrix(runif(30),nrow=10,ncol=3)
-normeRnAwR(X,vecd.ou.p,N,compt=0,affiche=1)
+normeRnAwR(X,vecd.or.p,N,compt=0,affiche=1)
 
 Equivalent en R:
 ----------------
 
-normeRnAwRpurR<-function(X,vecd.ou.p,N,compt=0,affiche=1) {
+normeRnAwRpurR<-function(X,vecd.or.p,N,compt=0,affiche=1) {
 
-if (length(vecd.ou.p) > 1) {
+if (length(vecd.or.p) > 1) {
 #on fait le cas non sériel
-vecd<-vecd.ou.p
+vecd<-vecd.or.p
 
 p<-length(vecd)
 resultat<-rep(0,2^p-p-1)
@@ -89,11 +89,11 @@ return(resultat)
 }
 
 
-if (length(vecd.ou.p)==1) {
+if (length(vecd.or.p)==1) {
 #On fait le cas sériel
 #Attention, on a considéré que n est grand par rapport à p et donc que l'on peut calculer R_{n,A} à la place de S_{n,A}
 #mais sur la matrice X de taille nprime x nprime ci-dessous
-p<-vecd.ou.p
+p<-vecd.or.p
 Y<-X
 n<-nrow(Y)
 q<-ncol(Y)
@@ -195,22 +195,22 @@ g++ -shared -L/usr/local/lib -o normeRnAwR.so normeRnAwR.o
 
 Pour utiliser dans R, taper source("normeRnAwR.R") où le fichier normeRnAwR.R contient le code R suivant:
  
-normeRnAwR <- function(X,vecd.ou.p,N=10,compt=0,affiche=1) {
+normeRnAwR <- function(X,vecd.or.p,N=10,compt=0,affiche=1) {
 
-#si length(vecd.ou.p)>1 alors cas non sériel sinon cas sériel
+#si length(vecd.or.p)>1 alors cas non sériel sinon cas sériel
 
 
 
 	     dyn.load(paste("normeRnAwR", .Platform$dynlib.ext, sep=""))
-           if (!is.numeric(vecd.ou.p))
+           if (!is.numeric(vecd.or.p))
                    stop("argument vecd must be numeric")
 
 
 
-if (length(vecd.ou.p) > 1) {
+if (length(vecd.or.p) > 1) {
 #on fait le cas non sériel
 seriel<-0
-vecd<-vecd.ou.p
+vecd<-vecd.or.p
 #Laisser compt=0 si il y a beaucoup de sous-vecteurs ou s'ils sont de trop grande taille
 if (compt != 0) {
 
@@ -252,12 +252,12 @@ return(out$resultat)
 }
 
 
-if (length(vecd.ou.p)==1) {
+if (length(vecd.or.p)==1) {
 #On fait le cas sériel
 #Attention, on a considéré que n est grand par rapport à p et donc que l'on peut calculer R_{n,A} à la place de S_{n,A}
 #mais sur la matrice X de taille nprime x nprime ci-dessous
 seriel<-1
-p<-vecd.ou.p
+p<-vecd.or.p
 vecd<-rep(ncol(X),p)
 
 
@@ -350,15 +350,15 @@ Dans la fenêtre Execution Window de R, taper:
 
 source("normeRnAwR.R")
 N<-10
-vecd.ou.p<-c(3,2)
+vecd.or.p<-c(3,2)
 X<-matrix(c(0.7,0.4,0.1,0.8,0.4,0.13,3.7,0.4,2.1,1.8,0.1,0.1,0.7,0.2,0.1),byrow=F,nrow=3)
-normeRnAwR(X,vecd.ou.p,N)
+normeRnAwR(X,vecd.or.p,N)
 
 source("normeRnAwR.R")
 N<-5
-vecd.ou.p<-3
+vecd.or.p<-3
 X<-matrix(runif(30),nrow=10,ncol=3)
-normeRnAwR(X,vecd.ou.p=4,N,compt=0,affiche=1)
+normeRnAwR(X,vecd.or.p=4,N,compt=0,affiche=1)
 
 
 Fin des commentaires */

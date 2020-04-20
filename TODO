@@ -1,0 +1,13 @@
+Hi Pierre,
+
+Thanks for the package it works well for multivariate case!
+A quick follow-up question is, can this mdcov function take samples with missing values? 
+If not, do you have any suggestion how to handle this case? As I understand this test is 
+based on empirical characteristic function, thus I guess there is some way to calculate 
+the test statistics ignoring the missing entries for each random variable?
+
+Thanks and happy new year 2018!
+
+Best,
+Chongliang
+chongliang.luo@uconn.edu

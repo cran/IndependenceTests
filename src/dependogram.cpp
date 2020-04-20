@@ -58,19 +58,19 @@ X<-matrix(c(runif(100),runif(100),rbinom(100,1,0.5)),nrow=100,byrow=F);x<-Sys.ti
 Equivalent en R:
 ----------------
 
-dependogram<-function(X,vecd.ou.p,N=10,B=200,alpha=0.05,compt=1) {
+dependogram<-function(X,vecd.or.p,N=10,B=200,alpha=0.05,compt=1) {
 
 
 
-if (length(vecd.ou.p) > 1) {
+if (length(vecd.or.p) > 1) {
 #on fait le cas non sériel
-vecd<-vecd.ou.p
+vecd<-vecd.or.p
 p<-length(vecd)
 taille<-2^p-p-1
 
 
 n<-nrow(X)
-RnAs<-normeRnAwR(X,vecd.ou.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A différents avec |A|>1
+RnAs<-normeRnAwR(X,vecd.or.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A différents avec |A|>1
 Rn<-max(RnAs)
 #Chaque ligne de la matrice RnAsetoile contiendra un vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A différents (pour la matrice Xetoile considérée)
 RnAsetoile<-matrix(0,nrow=B,ncol=taille)
@@ -106,18 +106,18 @@ return(res)
 }
 
 
-if (length(vecd.ou.p)==1) {
+if (length(vecd.or.p)==1) {
 #On fait le cas sériel
 #Attention, on a considéré que n est grand par rapport à p et donc que l'on peut calculer R_{n,A} à la place de S_{n,A}
 #mais sur la matrice X de taille nprime x nprime 
-p<-vecd.ou.p
+p<-vecd.or.p
 n<-nrow(X)
 q<-ncol(X)
 vecd<-q
 taille<-2^(p-1)-1
 
 
-RnAs<-normeRnAwR(X,vecd.ou.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A différents avec |A|>1
+RnAs<-normeRnAwR(X,vecd.or.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A différents avec |A|>1
 Rn<-max(RnAs)
 #Chaque ligne de la matrice RnAsetoile contiendra un vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A différents (pour la matrice Xetoile considérée)
 RnAsetoile<-matrix(0,nrow=B,ncol=taille)
@@ -127,7 +127,7 @@ if (compt == 1) {cat(B-b);cat(" ")}
 Xetoile<-c()
 aj<-sample(1:n,n)
 Xetoile<-X[aj,]
-RnAsetoile[b,]<-normeRnAwR(Xetoile,vecd.ou.p,N,0,0)
+RnAsetoile[b,]<-normeRnAwR(Xetoile,vecd.or.p,N,0,0)
 Rnetoile[b]<-max(RnAsetoile[b,])
 }
 cat("\n")
@@ -212,16 +212,16 @@ g++ -shared -L/usr/local/lib -o dependogram.so dependogram.o
 Pour utiliser dans R, taper source("dependogram.R") où le fichier dependogram.R contient le code R suivant:
  
 
-dependogram <- function(X,vecd.ou.p,N=10,B=200,alpha=0.05,affiche=1) {
+dependogram <- function(X,vecd.or.p,N=10,B=200,alpha=0.05,affiche=1) {
 
 X<-as.matrix(X)
 
-#si length(vecd.ou.p)>1 alors cas non sériel sinon cas sériel
+#si length(vecd.or.p)>1 alors cas non sériel sinon cas sériel
 
-if (length(vecd.ou.p) > 1) {
+if (length(vecd.or.p) > 1) {
 #on fait le cas non sériel
 seriel<-0
-vecd<-vecd.ou.p
+vecd<-vecd.or.p
 p<-length(vecd)
 taille<-2^p-p-1
 
@@ -305,10 +305,10 @@ return(res)
 
 
 
-if (length(vecd.ou.p) == 1) {
+if (length(vecd.or.p) == 1) {
 #on fait le cas non sériel
 seriel<-1
-p<-vecd.ou.p
+p<-vecd.or.p
 vecd<-rep(ncol(X),p)
 taille<-2^(p-1)-1
 
@@ -591,7 +591,7 @@ extern "C" {
 extern "C" {
 
 
-  void dependogram(int *N, int *vecd, int *lenvecd, int *p, double *X, int *n, int *q, int *B, double *alpha, double *RnAs, double *RnAsetoile, double *Rn, double *Rnetoile, int *seriel) 
+  void dependogramC(int *N, int *vecd, int *lenvecd, int *p, double *X, int *n, int *q, int *B, double *alpha, double *RnAs, double *RnAsetoile, double *Rn, double *Rnetoile, int *seriel) 
 
   {
  

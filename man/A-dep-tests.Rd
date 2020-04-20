@@ -1,8 +1,8 @@
 \encoding{UTF-8}
 \name{A.dep.tests}
 \alias{A.dep.tests}
-\title{Tests for mutual and serial independence of categorical variables}
-\description{The tests are constructed from the Mobius transformation
+\title{Tests for mutual or serial independence between categorical variables}
+\description{The tests are constructed from the \enc{Möbius}{Mobius} transformation
 applied to the probability cells in a multi-way contingency table. The
 Pearson chi-squared test of mutual independence is partitioned into
 A-dependence statistics over all subsets A of variables. The goal of the
@@ -18,45 +18,46 @@ aware that tests of serial independence obtained by methods suited to
 quantitative sequences by quantification of the labels are not 
 invariant to permutation of the labels contrary to the test described here.}
 \usage{
-A.dep.tests(Xmat,choice=1,d=0,m=d,freqname="",type="text")
+A.dep.tests(Xmat, choice = 1, d = 0, m = d, freqname = "", type = "text")
 }
 \arguments{
-  \item{Xmat}{Table or matrix of the contingency table data, if choice=1.
-   Vector of the time series data, if choice=2.}
-  \item{choice}{Integer. 1 for mutual, 2 for serial.}
-  \item{d}{Integer. Used only if choice=2 for the number of successive obervations.}
-  \item{m}{Integer. Maximum cardinality of subsets A for which an
-    A-dependence statistic is required. This option is particularly
-    useful for large values of d.}
-  \item{freqname}{Character. Used only when Xmat is a matrix to indicate
-  the name of the variable for the counts (frequencies).}
+  \item{Xmat}{Table, matrix or data-frame of the contingency table data,
+    if \code{choice} = 1. Vector of the time series data, if
+    \code{choice} = 2.}
+  \item{choice}{Integer. 1 for mutual independence, 2 for serial independence.}
+  \item{d}{Integer. Used only if \code{choice} = 2 for the number of successive obervations.}
+  \item{m}{Integer. Maximum cardinality of subsets \eqn{A} for which an
+    \eqn{A}-dependence statistic is required. This option is particularly
+    useful for large values of \code{d}.}
+  \item{freqname}{Character. Used only if \code{choice} = 1 and when \code{Xmat} is a
+    matrix or a data-frame to identify the variable for the counts (frequencies).}
   \item{type}{"text" or "html"}
 }
-\value{Returns an object of class list containing the following
+\value{Returns an object of class \code{list} containing the following
   components:
-  \item{TA}{ the A-dependence statistics for each subset A of variables.}
-  \item{fA}{ the degrees of freedom of the  A-dependence statistics.}
-  \item{pvalA}{ the p-values of the A-dependence statistics.}
-  \item{X}{ summary of the results.}
-  \item{X2}{ test statistic for mutual independence  obtained by the
-  sum of the A-dependence statistics.}
-  \item{Y2}{ test statistic for serial independence  obtained by the
-  sum of the A-dependence statistics.}
-  \item{f}{ number of degrees of freedom associated with the test statistic X2
-  or Y2.}
-  \item{pval}{ the p-value associated with the test statistic X2 or Y2.}
+  \item{TA}{\eqn{A}-dependence statistics for each subset \eqn{A} of variables.}
+  \item{fA}{degrees of freedom of the \eqn{A}-dependence statistics.}
+  \item{pvalA}{\eqn{p}-values of the \eqn{A}-dependence statistics.}
+  \item{X}{summary of the results.}
+  \item{X2}{test statistic for mutual independence obtained by the
+  sum of the \eqn{A}-dependence statistics, if \code{choice} = 1.}
+  \item{Y2}{test statistic for serial independence obtained by the
+  sum of the \eqn{A}-dependence statistics, if \code{choice} = 2.}
+  \item{f}{number of degrees of freedom associated with the test
+   statistic \code{X2} or \code{Y2}.}
+  \item{pval}{the \eqn{p}-value associated with the test statistic \code{X2} or \code{Y2}.}
 }
-\author{M. Bilodeau, P. Lafaye de Micheaux}
+\author{Bilodeau M., Lafaye de Micheaux P.}
 
-\references{Bilodeau, M., Lafaye de Micheaux, P (2009). A-dependence
+\references{Bilodeau M., Lafaye de Micheaux P. (2009). A-dependence
   statistics for mutual and serial independence of categorical
   variables, Journal of Statistical Planning and Inference, 139,
   2407-2419.
 
   Agresti A. (2002). Categorical data analysis, Wiley, p. 322
   
-  Whisenant, E.C., Rasheed, B.K.A., Ostrer, H., Bhatnagar,
-  Y.M. (1991). Evolution and sequence analysis of a human Y-chromosomal
+  Whisenant E.C., Rasheed B.K.A., Ostrer H., Bhatnagar  Y.M. (1991).
+  Evolution and sequence analysis of a human Y-chromosomal
   DNA fragment, J. Mol. Evol., 33, 133-141.
 }
 
@@ -64,20 +65,21 @@ A.dep.tests(Xmat,choice=1,d=0,m=d,freqname="",type="text")
 # Test of  mutual independence between 3 independent Bernoulli variables.
 
 n <- 100
-data <- data.frame(X1=rbinom(n,1,0.3),X2=rbinom(n,1,0.3),X3=rbinom(n,1,0.3))
+data <- data.frame(X1 = rbinom(n, 1, 0.3), X2 = rbinom(n, 1, 0.3) , X3 =
+                   rbinom(n, 1, 0.3))
 X <- table(data)
 A.dep.tests(X)
 
 # Test of mutual independence between 4 variables which are
-# 2-independent and 3-independent but 4-dependent.
+# 2-independent and 3-independent, but are 4-dependent.
 
 n <- 100
-W <- sample(x=1:8,size=n,TRUE)
-X1 <- W \%in\% c(1,2,3,5)
-X2 <- W \%in\% c(1,2,4,6)
-X3 <- W \%in\% c(1,3,4,7)
-X4 <- W \%in\% c(2,3,4,8)
-data <- data.frame(X1,X2,X3,X4)
+W <- sample(x = 1:8, size = n, TRUE)
+X1 <- W \%in\% c(1, 2, 3, 5)
+X2 <- W \%in\% c(1, 2, 4, 6)
+X3 <- W \%in\% c(1, 3, 4, 7)
+X4 <- W \%in\% c(2, 3, 4, 8)
+data <- data.frame(X1, X2, X3, X4)
 X <- table(data)
 A.dep.tests(X)
 
@@ -88,17 +90,17 @@ data(dna)
 x2 <- dna[1]
 for (i in 2:length(dna)) x2 <- paste(x2, dna[i], sep = "")
 x <- unlist(strsplit(x2, ""))
-x[x=="a"|x=="g"] <- "r"
-x[x=="c"|x=="t"] <- "y"
+x[x == "a" | x == "g"] <- "r"
+x[x == "c" |  x== "t"] <- "y"
 \donttest{
-out <- A.dep.tests(x,choice=2,d=1501,m=2)$TA[[1]]
-plot(100:1500,out[100:1500],xlab="lag j",ylab="T(1,j+1)",pch=19)
-abline(h=qchisq(.995,df=1))
+out <- A.dep.tests(x, choice = 2, d = 1501, m = 2)$TA[[1]]
+plot(100:1500, out[100:1500], xlab = "lag j", ylab = "T(1,j+1)", pch = 19)
+abline(h = qchisq(.995, df = 1))
 }
 
 # Analysis of a contingency table in Agresti (2002) p. 322 
 
 data(highschool)
-A.dep.tests(highschool,freqname="count")
+A.dep.tests(highschool, freqname = "count")
 
 }

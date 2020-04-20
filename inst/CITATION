@@ -2,18 +2,17 @@ citHeader("To cite the IndependenceTests package in publications use:")
 
 citEntry(entry="Article",
          title = "IndependenceTests",
-         author = personList(as.person("P. Lafaye de Micheaux"), 
+         author = personList(as.person("Pierre Lafaye de Micheaux"), 
                              as.person("M. Bilodeau")
 				),
 	 journal = "not yet published",
 	 publisher = "",
-         year         = 2011,
-         note         = "Software: R Package, PoweR, version 0.5",
-         url          = "http://www.biostatisticien.eu/fr/logiciels/independencetests.html",
+         year         = 2014,
+         note         = "Software: R Package, IndependenceTests, version 0.4",
          
          textVersion = 
          paste("Lafaye De Micheaux, P. and Bilodeau, M. (2008)", 
-              "(Software: R Package, IndependenceTests, version 0.1)"
+              "(Software: R Package, IndependenceTests, version 0.4)"
 	      )
 )
 

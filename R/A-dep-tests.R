@@ -154,7 +154,7 @@ A.dep.tests <- function(Xmat,choice=1,d=0,m=d,freqname="",type="text") {
 
 
   if (type=="html") {
-    require(xtable)
+#    require(xtable)
     sortie <- cbind(subset=rownames(X),round(X,2))
     sortie <- rbind(sortie,c("",sortie[nrow(sortie),2:4]))
     if (choice==1) {sortie[nrow(sortie)-1,] <- c("<B>all</B>","<B>X<sup>2</sup></B>","<B>total</B>","<B>p.value</B>")}
