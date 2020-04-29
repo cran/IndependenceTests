@@ -19,7 +19,7 @@ End comments */
 
 #include <R.h>
 #include "Rmath.h"
-#include <complex.h>
+#include <complex>
 //#include <iostream>
 using namespace std;
 

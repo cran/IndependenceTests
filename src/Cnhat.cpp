@@ -1,22 +1,23 @@
 #include <R.h>
 #include "Rmath.h"
-#include <complex.h>
+#include "mycomplex.h"
 #include <iostream>
 using namespace std;
 
 extern"C" {
 
-  void CnhatC(double *vecs, double *vect, double *X, int *n, int *q, int *p, int *vecd, double _Complex *res) {
+  void CnhatC(double *vecs, double *vect, double *X, int *n, int *q, int *p, int *vecd, std::complex<double> *res) {
 
-    void phinhatReturn(double *vect1, double *vect2, double *vect3, double *X, int *q, int *n, double _Complex *res1, double _Complex *res2, double _Complex *res3);
-    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = 1.0 + 0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;
+    void phinhatReturn(double *vect1, double *vect2, double *vect3, double *X, int *q, int *n, cmplx *res1, cmplx *res2, cmplx *res3);
+    cmplx prod1 = C(1.0, 0.0), prod2 = C(1.0, 0.0), somme = C(0.0, 0.0);
+    cmplx tmp2;
     int indbeginblocl, l, i, *vecdl, k, j;
     double *vecsl, *mvectl, *diffvecsvectl, *Xl;
-    double _Complex *res1, *res2, *res3;
+    cmplx *res1, *res2, *res3;
     vecdl = new int[1];
-    res1 =  new _Complex double[1];
-    res2 =  new _Complex double[1];
-    res3 =  new _Complex double[1];
+    res1 =  new cmplx[1];
+    res2 =  new cmplx[1];
+    res3 =  new cmplx[1];
 
     for (l = 0; l <= (p[0]-1); l++) {
       indbeginblocl = 1;
@@ -56,16 +57,16 @@ extern"C" {
     delete[] res1;
     delete[] res2;
     delete[] res3;
-    res[0] = prod1 - prod2 * (1 - p[0] + somme);
+    res[0] = prod1 - prod2 * (cmplx)(1 - (double)p[0] + somme);
 
   }
 
-  void CnhatmatC(double *yMat, int *N, double *X, int *n, int *q, int *p, int *vecd, double _Complex *res) {
+  void CnhatmatC(double *yMat, int *N, double *X, int *n, int *q, int *p, int *vecd, cmplx *res) {
 
     int i, j, k, qm = q[0] - 1, Nm = N[0] - 1;
     double *vect, *vecs;
-    double _Complex *restmp;
-    restmp = new _Complex double[1];
+    cmplx *restmp;
+    restmp = new cmplx[1];
     vecs = new double[q[0]];
     vect = new double[q[0]];
 
@@ -92,12 +93,12 @@ extern"C" {
     delete[] vect;
   }
 
-  void CnhatmatClower(double *yMat, int *N, double *X, int *n, int *q, int *p, int *vecd, double _Complex *res, double *sqrtweights) {
+  void CnhatmatClower(double *yMat, int *N, double *X, int *n, int *q, int *p, int *vecd, cmplx *res, double *sqrtweights) {
 
     int i, j, k, l, qm = q[0] - 1, Nm = N[0] - 1;
     double *vect, *vecs;
-    double _Complex  *restmp;
-    restmp = new _Complex double[1];
+    cmplx *restmp;
+    restmp = new cmplx[1];
     vecs = new double[q[0]];
     vect = new double[q[0]];
 
@@ -121,12 +122,13 @@ extern"C" {
     delete[] vect;
   }
   
-  void phinhatReturn(double *vect1, double *vect2, double *vect3, double *X, int *q, int *n, double _Complex *res1, double _Complex *res2, double _Complex *res3) {
+  void phinhatReturn(double *vect1, double *vect2, double *vect3, double *X, int *q, int *n, cmplx *res1, cmplx *res2, cmplx *res3) {
     int j, col, qm = q[0]-1;
     double tmp1, tmp2, tmp3, tmp;
-    res1[0] = 0.0 + 0.0*_Complex_I;
-    res2[0] = 0.0 + 0.0*_Complex_I;
-    res3[0] = 0.0 + 0.0*_Complex_I;
+    cmplx I = C(0.0, 1.0);
+    res1[0] = C(0.0, 0.0);
+    res2[0] = C(0.0, 0.0);
+    res3[0] = C(0.0, 0.0);
 
     for (j = 0; j<= (n[0]-1); j++) {
       tmp1 = 0.0;
@@ -138,13 +140,13 @@ extern"C" {
 	tmp2 = tmp2 + vect2[col] * tmp;
 	tmp3 = tmp3 + vect3[col] * tmp;
       }      
-      res1[0] = res1[0] + cexp(_Complex_I * tmp1);
-      res2[0] = res2[0] + cexp(_Complex_I * tmp2);
-      res3[0] = res3[0] + cexp(_Complex_I * tmp3);
+      res1[0] = res1[0] + cexp(I * tmp1);
+      res2[0] = res2[0] + cexp(I * tmp2);
+      res3[0] = res3[0] + cexp(I * tmp3);
     }
-    res1[0] = res1[0] / (double _Complex)n[0];
-    res2[0] = res2[0] / (double _Complex)n[0];
-    res3[0] = res3[0] / (double _Complex)n[0];
+    res1[0] = res1[0] / (double)n[0];
+    res2[0] = res2[0] / (double)n[0];
+    res3[0] = res3[0] / (double)n[0];
   }
   
 

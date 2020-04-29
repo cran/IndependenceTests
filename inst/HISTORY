@@ -12,10 +12,10 @@ Version 0.2:
 - I commented out a "cout" call in file normeRnAwR.cpp
 - I modified the files A-dep-tests.Rd and dependogram.Rd by adding some \donttest{} blocks.
 
-2018-05-10
+2020-04-29
 ----------
 
-Version 0.3:
+Version 0.4:
 - I removed a require(xtable) in file A-dep-tests.R
 - I added CompQuadForm and MASS in NAMESPACE file
 - I added the functions mdcov, mdcov.pval and mdcov.lambdas and the associated help files
@@ -26,3 +26,4 @@ Version 0.3:
 - I corrected an incorrect use of the function is.loaded() to check if some packages are loaded
 - I changed exp(gamma()) to gammafn() in file cubature1.cpp
 - I changed my email address to lafaye@unsw.edu.au
+- I added a file mycomplex.h to deal with complex numbers in C
