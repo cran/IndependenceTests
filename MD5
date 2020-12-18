@@ -1,4 +1,4 @@
-03e68a7f5e05878b3490c13ab55bfd36 *DESCRIPTION
+540d13c69e01f1428fa39baec5d228ba *DESCRIPTION
 ea887ff5f25b6114fb7e31fcfeacb437 *INDEX
 ed932f3503671772439ed235c85e952c *NAMESPACE
 8b6e2e54905daa4937f9f100da3905c5 *R/A-dep-tests.R
@@ -11,13 +11,13 @@ eb2a1a528042da932ba9fb5d9a6ebfff *R/zzz.R
 69a47e105ed80e7b8b0488df6cc9bd28 *TODO
 1b53ac25e5bb340c9087f466e7b7283b *data/dna.rda
 6ef9b19ad67c1ffcf041a3c341290f67 *data/highschool.rda
-7abf9e7184f0a4d2f3fd828fe4c580b1 *inst/CITATION
-092b60465618804e94298b451b7bfe8c *inst/HISTORY
+cdd16428bda0a1aeef1a8da5397f1ab4 *inst/CITATION
+4287a665aa13420a06c2f1bfe85420bd *inst/HISTORY
 facacd81e23b374fd693e28b04c2e895 *man/A-dep-tests.Rd
 e4b429180bac3f001adcfd678b0a48ec *man/dependogram.Rd
 b02f81dee5e15a3f642fde5d1273c431 *man/dna.Rd
 73a4a6481b7022dd6ec7c9045b00c077 *man/highschool.Rd
-f65ad0ff225cc4d2e270b44480a780ba *man/mdcov.Rd
+66f6e079b96bbd899bc6c5c4dcd59b74 *man/mdcov.Rd
 d9d161295646ed5e26a7825dcffa578d *src/Cnhat.cpp
 b9413fcd8d56019530754a838861b762 *src/IndependenceTests_init.c
 e840a4aec2a4795cd479ab78344577f3 *src/Makevars
@@ -25,7 +25,7 @@ fb7881b5603c5cf20fa05ba852d1fec9 *src/cubature1.cpp
 599d9f75814b6bbb09d9606913151a2d *src/dependogram.cpp
 519bc00095841e7c84c3890db7f6b120 *src/mdcov.cpp
 c409c616450b13367ce3ac148eb9151f *src/mycomplex.h
-55d6189ba43c0de50215697745b5775a *src/myzhpevx.cpp
+0bfcbb5e4f812635b7144205cd79cbf4 *src/myzhpevx.cpp
 fdc160803ae8df91b4ee166f8767f6ca *src/others/Cnp.cpp
 fe522c7225599960921ff6a4df521230 *src/others/binarycode.c
 5e3ca9a7172ff599db223f056eeedba4 *src/others/combn.cpp
@@ -73,4 +73,4 @@ aba91a69e4edb9d72b3233972ea51a35 *src/othersfortran/zung2r.f
 147071945fb68eb622694f50c1278f92 *src/othersfortran/zupgtr.f
 8954c48bd898079a99562cf529e8bfae *src/othersfortran/zupmtr.f
 bb3c5af020fa110a78fd05377f7e5358 *src/phinhat.cpp
-4012a97a6cefa3aeada80a028f5cd456 *src/zhpevx.f
+f7f0e6a15ed9d7a9eaab1f2a9a5e8f1a *src/zhpevx.f

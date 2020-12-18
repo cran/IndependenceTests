@@ -229,7 +229,7 @@
 *     > \ingroup complex16OTHEReigen
 *     
 *     =====================================================================
-      SUBROUTINE zhpevx( JOBZ, RANGE, UPLO, N, AP, VL, VU, IL, IU,
+      SUBROUTINE zhpevx(JOBZ, RANGE, UPLO, N, AP, VL, VU, IL, IU,
      $     abstol, m, w, z, ldz, work, rwork, iwork,
      $     ifail, info )
 *     

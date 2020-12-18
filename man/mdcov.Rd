@@ -70,6 +70,9 @@ their sum)}
 Lafaye de Micheaux P.
 }
 
+\references{Fan Y., Lafaye de Micheaux P., Penev S. and Salopek D. (2017). Multivariate nonparametric test of independence, Journal of Multivariate Analysis, 153, 189-210.
+  }
+
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \examples{

@@ -5,11 +5,11 @@ citEntry(entry="Manual",
          author = personList(as.person("Pierre Lafaye de Micheaux")
 				),
          year         = 2020,
-         note         = "Software: R Package, IndependenceTests, version 0.4",
+         note         = "Software: R Package, IndependenceTests, version 0.5",
          
          textVersion = 
          paste("Lafaye De Micheaux, P. (2020)", 
-              "(Software: R Package, IndependenceTests, version 0.4)"
+              "(Software: R Package, IndependenceTests, version 0.5)"
 	      )
 )
 

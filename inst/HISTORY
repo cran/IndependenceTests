@@ -27,3 +27,11 @@ Version 0.4:
 - I changed exp(gamma()) to gammafn() in file cubature1.cpp
 - I changed my email address to lafaye@unsw.edu.au
 - I added a file mycomplex.h to deal with complex numbers in C
+
+2020-12-18
+----------
+
+Version 0.5:
+- I modified the content of file myzhpevx.cpp to prevent an LTO error
+- I added a reference in file mdcov.Rd
+- I added three references in the Description field of file DESCRIPTION
