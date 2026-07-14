@@ -23,10 +23,10 @@
 *       .. Scalar Arguments ..
 *       CHARACTER          SIDE
 *       INTEGER            INCV, LDC, M, N
-*       COMPLEX*16         TAU
+*       DOUBLE COMPLEX         TAU
 *       ..
 *       .. Array Arguments ..
-*       COMPLEX*16         C( LDC, * ), V( * ), WORK( * )
+*       DOUBLE COMPLEX         C( LDC, * ), V( * ), WORK( * )
 *       ..
 *  
 *
@@ -54,7 +54,7 @@
 *
 *> \param[in] SIDE
 *> \verbatim
-*>          SIDE is CHARACTER*1
+*>          SIDE is CHARACTER(LEN=1)
 *>          = 'L': form  H * C
 *>          = 'R': form  C * H
 *> \endverbatim
@@ -73,7 +73,7 @@
 *>
 *> \param[in] V
 *> \verbatim
-*>          V is COMPLEX*16 array, dimension
+*>          V is DOUBLE COMPLEX array, dimension
 *>                     (1 + (M-1)*abs(INCV)) if SIDE = 'L'
 *>                  or (1 + (N-1)*abs(INCV)) if SIDE = 'R'
 *>          The vector v in the representation of H. V is not used if
@@ -88,13 +88,13 @@
 *>
 *> \param[in] TAU
 *> \verbatim
-*>          TAU is COMPLEX*16
+*>          TAU is DOUBLE COMPLEX
 *>          The value tau in the representation of H.
 *> \endverbatim
 *>
 *> \param[in,out] C
 *> \verbatim
-*>          C is COMPLEX*16 array, dimension (LDC,N)
+*>          C is DOUBLE COMPLEX array, dimension (LDC,N)
 *>          On entry, the M-by-N matrix C.
 *>          On exit, C is overwritten by the matrix H * C if SIDE = 'L',
 *>          or C * H if SIDE = 'R'.
@@ -108,7 +108,7 @@
 *>
 *> \param[out] WORK
 *> \verbatim
-*>          WORK is COMPLEX*16 array, dimension
+*>          WORK is DOUBLE COMPLEX array, dimension
 *>                         (N) if SIDE = 'L'
 *>                      or (M) if SIDE = 'R'
 *> \endverbatim
@@ -136,16 +136,16 @@
 *     .. Scalar Arguments ..
       CHARACTER          SIDE
       INTEGER            INCV, LDC, M, N
-      COMPLEX*16         TAU
+      DOUBLE COMPLEX         TAU
 *     ..
 *     .. Array Arguments ..
-      COMPLEX*16         C( LDC, * ), V( * ), WORK( * )
+      DOUBLE COMPLEX         C( LDC, * ), V( * ), WORK( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      COMPLEX*16         ONE, ZERO
+      DOUBLE COMPLEX         ONE, ZERO
       PARAMETER          ( ONE = ( 1.0D+0, 0.0D+0 ),
      $                   ZERO = ( 0.0D+0, 0.0D+0 ) )
 *     ..

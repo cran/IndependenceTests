@@ -61,7 +61,7 @@
 *
 *> \param[in] NORM
 *> \verbatim
-*>          NORM is CHARACTER*1
+*>          NORM is CHARACTER(LEN=1)
 *>          Specifies the value to be returned in DLANST as described
 *>          above.
 *> \endverbatim

@@ -22,10 +22,10 @@
 * 
 *       .. Scalar Arguments ..
 *       INTEGER            INCX, N
-*       COMPLEX*16         ALPHA, TAU
+*       DOUBLE COMPLEX         ALPHA, TAU
 *       ..
 *       .. Array Arguments ..
-*       COMPLEX*16         X( * )
+*       DOUBLE COMPLEX         X( * )
 *       ..
 *  
 *
@@ -66,14 +66,14 @@
 *>
 *> \param[in,out] ALPHA
 *> \verbatim
-*>          ALPHA is COMPLEX*16
+*>          ALPHA is DOUBLE COMPLEX
 *>          On entry, the value alpha.
 *>          On exit, it is overwritten with the value beta.
 *> \endverbatim
 *>
 *> \param[in,out] X
 *> \verbatim
-*>          X is COMPLEX*16 array, dimension
+*>          X is DOUBLE COMPLEX array, dimension
 *>                         (1+(N-2)*abs(INCX))
 *>          On entry, the vector x.
 *>          On exit, it is overwritten with the vector v.
@@ -87,7 +87,7 @@
 *>
 *> \param[out] TAU
 *> \verbatim
-*>          TAU is COMPLEX*16
+*>          TAU is DOUBLE COMPLEX
 *>          The value tau.
 *> \endverbatim
 *
@@ -113,10 +113,10 @@
 *
 *     .. Scalar Arguments ..
       INTEGER            INCX, N
-      COMPLEX*16         ALPHA, TAU
+      DOUBLE COMPLEX         ALPHA, TAU
 *     ..
 *     .. Array Arguments ..
-      COMPLEX*16         X( * )
+      DOUBLE COMPLEX         X( * )
 *     ..
 *
 *  =====================================================================
@@ -131,7 +131,7 @@
 *     ..
 *     .. External Functions ..
       DOUBLE PRECISION   DLAMCH, DLAPY3, DZNRM2
-      COMPLEX*16         ZLADIV
+      DOUBLE COMPLEX         ZLADIV
       EXTERNAL           DLAMCH, DLAPY3, DZNRM2, ZLADIV
 *     ..
 *     .. Intrinsic Functions ..

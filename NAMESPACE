@@ -17,4 +17,6 @@ importFrom("stats", "dnorm", "optim", "pchisq", "pnorm", "rnorm",
            "runif", "uniroot")
 importFrom("utils", "combn")
 
-export(A.dep.tests, dependogram, mdcov, .sinint, .Cnhatmat, .mdcov.lambdas, .mdcov.pval)
+export(A.dep.tests, dependogram, mdcov)
+
+S3method(print,A.dep.tests)

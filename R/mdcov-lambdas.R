@@ -163,6 +163,7 @@
 # This instruction computes only the lower part of the below matrix 
 # and stores the result into a vector (not a matrix) to be passed to AP below.
     Matlower <- .C("CnhatmatClower", as.double(yMat), as.integer(nrow(yMat)), as.double(X), as.integer(nrow(X)), as.integer(ncol(X)), as.integer(length(vecd)), as.integer(vecd), res = as.complex(rep(0.0, N * (N + 1) / 2)), sqrtweights = as.double(sqrt(weights)), PACKAGE = "IndependenceTests")$res
+
     
     if (K > N) K <- N
 
@@ -179,7 +180,7 @@
 #                             IFAIL = as.integer(0), INFO = as.integer(0), PACKAGE = "IndependenceTests")$W[1]
   
   
-    eig.largest <- .C("zhpevxC", JOBZ = as.character("N"), RANGE = as.character("I"), UPLO = as.character("L"), 
+   eig.largest <- .C("zhpevxC", JOBZ = as.character("N"), RANGE = as.character("I"), UPLO = as.character("L"), 
                              N = as.integer(N), AP = as.complex(Matlower), VL = as.double(0), 
                              VU = as.double(0), IL = as.integer(N), IU = as.integer(N),
                              ABSTOL = as.double(10 ^ (-10)), M = as.integer(0), W = as.double(rep(0, N)), 

@@ -35,3 +35,29 @@ Version 0.5:
 - I modified the content of file myzhpevx.cpp to prevent an LTO error
 - I added a reference in file mdcov.Rd
 - I added three references in the Description field of file DESCRIPTION
+
+2025-07-12
+----------
+
+Version 0.6:
+- I modified the file myzhpevx.cpp
+- I added temporarily PKG_FFLAGS += -fc-prototypes-external in the src/Makevars file to help me debug this file (then I removed this instruction)
+- I corrected the CITATION file to use person() instead of as.person() and bibentry() instead of citEntry()
+- In file cubature1.cpp, I replace PI with pi. 
+  Also, on line 461, I replace   delete y; with   delete[] y;
+- I also added, temporarily, PKG_FFLAGS += -pedantic -O2  -mfpmath=sse -msse2 -mstackrealign -Wall -fc-prototypes-external to the src/Makevars file
+
+2026-07-06
+----------
+Version 0.7:
+- Replaced all COMPLEX*16 declarations with DOUBLE COMPLEX in src/othersfortran/ Fortran files (standard Fortran 90, fixes GCC 16 warnings)
+- Replaced old-style CHARACTER*N declarations with CHARACTER(LEN=N) in src/othersfortran/ilaenv.f and xerbla.f
+- Replaced computed GOTOs in src/othersfortran/ilaenv.f with standard IF/ELSE IF blocks (two computed GOTOs: one jumping to labels 10/80/90/100/110/120/130/140/150/160, one to labels 50/60/70)
+- Removed non-portable and x86-specific flags from src/Makevars (-mfpmath=sse, -msse2, -mstackrealign, -fc-prototypes-external, -pedantic, -Wall)
+- Removed GNU make extensions (+=, all: target) from src/Makevars
+- Removed internal functions (.Cnhatmat, .mdcov.lambdas, .mdcov.pval, .sinint) from NAMESPACE (were incorrectly exported)
+- Removed redundant Author field from DESCRIPTION (superseded by Authors@R)
+- Added ORCID (0000-0002-0247-5136) for Pierre Lafaye De Micheaux in DESCRIPTION
+- Updated Date field in DESCRIPTION
+- Updated version to 0.7 (previous CRAN version was 0.5, archived 2021-03-01)
+- modified the file A-dep-tests.R (and associated file A-dep-tests.Rd) by adding (and using) a function print.A.dep.tests(), declared in NAMESPACE.

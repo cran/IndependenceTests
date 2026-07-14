@@ -47,7 +47,7 @@
 *
 *> \param[in] TYPE
 *> \verbatim
-*>          TYPE is CHARACTER*1
+*>          TYPE is CHARACTER(LEN=1)
 *>          TYPE indices the storage type of the input matrix.
 *>          = 'G':  A is a full matrix.
 *>          = 'L':  A is a lower triangular matrix.

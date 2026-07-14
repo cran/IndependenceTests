@@ -26,7 +26,7 @@
 *       ..
 *       .. Array Arguments ..
 *       DOUBLE PRECISION   D( * ), E( * )
-*       COMPLEX*16         AP( * ), TAU( * )
+*       DOUBLE COMPLEX         AP( * ), TAU( * )
 *       ..
 *  
 *
@@ -45,7 +45,7 @@
 *
 *> \param[in] UPLO
 *> \verbatim
-*>          UPLO is CHARACTER*1
+*>          UPLO is CHARACTER(LEN=1)
 *>          = 'U':  Upper triangle of A is stored;
 *>          = 'L':  Lower triangle of A is stored.
 *> \endverbatim
@@ -58,7 +58,7 @@
 *>
 *> \param[in,out] AP
 *> \verbatim
-*>          AP is COMPLEX*16 array, dimension (N*(N+1)/2)
+*>          AP is DOUBLE COMPLEX array, dimension (N*(N+1)/2)
 *>          On entry, the upper or lower triangle of the Hermitian matrix
 *>          A, packed columnwise in a linear array.  The j-th column of A
 *>          is stored in the array AP as follows:
@@ -92,7 +92,7 @@
 *>
 *> \param[out] TAU
 *> \verbatim
-*>          TAU is COMPLEX*16 array, dimension (N-1)
+*>          TAU is DOUBLE COMPLEX array, dimension (N-1)
 *>          The scalar factors of the elementary reflectors (see Further
 *>          Details).
 *> \endverbatim
@@ -162,13 +162,13 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   D( * ), E( * )
-      COMPLEX*16         AP( * ), TAU( * )
+      DOUBLE COMPLEX         AP( * ), TAU( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      COMPLEX*16         ONE, ZERO, HALF
+      DOUBLE COMPLEX         ONE, ZERO, HALF
       PARAMETER          ( ONE = ( 1.0D+0, 0.0D+0 ),
      $                   ZERO = ( 0.0D+0, 0.0D+0 ),
      $                   HALF = ( 0.5D+0, 0.0D+0 ) )
@@ -176,14 +176,14 @@
 *     .. Local Scalars ..
       LOGICAL            UPPER
       INTEGER            I, I1, I1I1, II
-      COMPLEX*16         ALPHA, TAUI
+      DOUBLE COMPLEX         ALPHA, TAUI
 *     ..
 *     .. External Subroutines ..
       EXTERNAL           XERBLA, ZAXPY, ZHPMV, ZHPR2, ZLARFG
 *     ..
 *     .. External Functions ..
       LOGICAL            LSAME
-      COMPLEX*16         ZDOTC
+      DOUBLE COMPLEX         ZDOTC
       EXTERNAL           LSAME, ZDOTC
 *     ..
 *     .. Intrinsic Functions ..

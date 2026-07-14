@@ -21,7 +21,7 @@
 *       SUBROUTINE XERBLA( SRNAME, INFO )
 * 
 *       .. Scalar Arguments ..
-*       CHARACTER*(*)      SRNAME
+*       CHARACTER(LEN=*)      SRNAME
 *       INTEGER            INFO
 *       ..
 *  
@@ -44,7 +44,7 @@
 *
 *> \param[in] SRNAME
 *> \verbatim
-*>          SRNAME is CHARACTER*(*)
+*>          SRNAME is CHARACTER(LEN=*)
 *>          The name of the routine which called XERBLA.
 *> \endverbatim
 *>
@@ -76,7 +76,7 @@
 *     November 2011
 *
 *     .. Scalar Arguments ..
-      CHARACTER*(*)      SRNAME
+      CHARACTER(LEN=*)      SRNAME
       INTEGER            INFO
 *     ..
 *

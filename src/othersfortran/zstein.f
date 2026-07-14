@@ -28,7 +28,7 @@
 *       INTEGER            IBLOCK( * ), IFAIL( * ), ISPLIT( * ),
 *      $                   IWORK( * )
 *       DOUBLE PRECISION   D( * ), E( * ), W( * ), WORK( * )
-*       COMPLEX*16         Z( LDZ, * )
+*       DOUBLE COMPLEX         Z( LDZ, * )
 *       ..
 *  
 *
@@ -111,7 +111,7 @@
 *>
 *> \param[out] Z
 *> \verbatim
-*>          Z is COMPLEX*16 array, dimension (LDZ, M)
+*>          Z is DOUBLE COMPLEX array, dimension (LDZ, M)
 *>          The computed eigenvectors.  The eigenvector associated
 *>          with the eigenvalue W(i) is stored in the i-th column of
 *>          Z.  Any vector which fails to converge is set to its current
@@ -194,13 +194,13 @@
       INTEGER            IBLOCK( * ), IFAIL( * ), ISPLIT( * ),
      $                   IWORK( * )
       DOUBLE PRECISION   D( * ), E( * ), W( * ), WORK( * )
-      COMPLEX*16         Z( LDZ, * )
+      DOUBLE COMPLEX         Z( LDZ, * )
 *     ..
 *
 * =====================================================================
 *
 *     .. Parameters ..
-      COMPLEX*16         CZERO, CONE
+      DOUBLE COMPLEX         CZERO, CONE
       PARAMETER          ( CZERO = ( 0.0D+0, 0.0D+0 ),
      $                   CONE = ( 1.0D+0, 0.0D+0 ) )
       DOUBLE PRECISION   ZERO, ONE, TEN, ODM3, ODM1

@@ -46,7 +46,7 @@
 *
 *> \param[in] ID
 *> \verbatim
-*>          ID is CHARACTER*1
+*>          ID is CHARACTER(LEN=1)
 *>          = 'I': sort D in increasing order;
 *>          = 'D': sort D in decreasing order.
 *> \endverbatim

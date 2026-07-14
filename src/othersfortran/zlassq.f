@@ -25,7 +25,7 @@
 *       DOUBLE PRECISION   SCALE, SUMSQ
 *       ..
 *       .. Array Arguments ..
-*       COMPLEX*16         X( * )
+*       DOUBLE COMPLEX         X( * )
 *       ..
 *  
 *
@@ -65,7 +65,7 @@
 *>
 *> \param[in] X
 *> \verbatim
-*>          X is COMPLEX*16 array, dimension (N)
+*>          X is DOUBLE COMPLEX array, dimension (N)
 *>          The vector x as described above.
 *>             x( i )  = X( 1 + ( i - 1 )*INCX ), 1 <= i <= n.
 *> \endverbatim
@@ -116,7 +116,7 @@
       DOUBLE PRECISION   SCALE, SUMSQ
 *     ..
 *     .. Array Arguments ..
-      COMPLEX*16         X( * )
+      DOUBLE COMPLEX         X( * )
 *     ..
 *
 * =====================================================================

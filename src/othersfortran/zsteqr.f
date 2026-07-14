@@ -26,7 +26,7 @@
 *       ..
 *       .. Array Arguments ..
 *       DOUBLE PRECISION   D( * ), E( * ), WORK( * )
-*       COMPLEX*16         Z( LDZ, * )
+*       DOUBLE COMPLEX         Z( LDZ, * )
 *       ..
 *  
 *
@@ -47,7 +47,7 @@
 *
 *> \param[in] COMPZ
 *> \verbatim
-*>          COMPZ is CHARACTER*1
+*>          COMPZ is CHARACTER(LEN=1)
 *>          = 'N':  Compute eigenvalues only.
 *>          = 'V':  Compute eigenvalues and eigenvectors of the original
 *>                  Hermitian matrix.  On entry, Z must contain the
@@ -81,7 +81,7 @@
 *>
 *> \param[in,out] Z
 *> \verbatim
-*>          Z is COMPLEX*16 array, dimension (LDZ, N)
+*>          Z is DOUBLE COMPLEX array, dimension (LDZ, N)
 *>          On entry, if  COMPZ = 'V', then Z contains the unitary
 *>          matrix used in the reduction to tridiagonal form.
 *>          On exit, if INFO = 0, then if COMPZ = 'V', Z contains the
@@ -143,7 +143,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   D( * ), E( * ), WORK( * )
-      COMPLEX*16         Z( LDZ, * )
+      DOUBLE COMPLEX         Z( LDZ, * )
 *     ..
 *
 *  =====================================================================
@@ -152,7 +152,7 @@
       DOUBLE PRECISION   ZERO, ONE, TWO, THREE
       PARAMETER          ( ZERO = 0.0D0, ONE = 1.0D0, TWO = 2.0D0,
      $                   THREE = 3.0D0 )
-      COMPLEX*16         CZERO, CONE
+      DOUBLE COMPLEX         CZERO, CONE
       PARAMETER          ( CZERO = ( 0.0D0, 0.0D0 ),
      $                   CONE = ( 1.0D0, 0.0D0 ) )
       INTEGER            MAXIT

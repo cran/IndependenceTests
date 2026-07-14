@@ -18,10 +18,10 @@
 *  Definition:
 *  ===========
 *
-*       COMPLEX*16     FUNCTION ZLADIV( X, Y )
+*       DOUBLE COMPLEX     FUNCTION ZLADIV( X, Y )
 * 
 *       .. Scalar Arguments ..
-*       COMPLEX*16         X, Y
+*       DOUBLE COMPLEX         X, Y
 *       ..
 *  
 *
@@ -40,12 +40,12 @@
 *
 *> \param[in] X
 *> \verbatim
-*>          X is COMPLEX*16
+*>          X is DOUBLE COMPLEX
 *> \endverbatim
 *>
 *> \param[in] Y
 *> \verbatim
-*>          Y is COMPLEX*16
+*>          Y is DOUBLE COMPLEX
 *>          The complex scalars X and Y.
 *> \endverbatim
 *
@@ -62,7 +62,7 @@
 *> \ingroup complex16OTHERauxiliary
 *
 *  =====================================================================
-      COMPLEX*16     FUNCTION ZLADIV( X, Y )
+      DOUBLE COMPLEX     FUNCTION ZLADIV( X, Y )
 *
 *  -- LAPACK auxiliary routine (version 3.4.2) --
 *  -- LAPACK is a software package provided by Univ. of Tennessee,    --
@@ -70,7 +70,7 @@
 *     September 2012
 *
 *     .. Scalar Arguments ..
-      COMPLEX*16         X, Y
+      DOUBLE COMPLEX         X, Y
 *     ..
 *
 *  =====================================================================

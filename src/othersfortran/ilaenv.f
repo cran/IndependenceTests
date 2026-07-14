@@ -21,7 +21,7 @@
 *       INTEGER FUNCTION ILAENV( ISPEC, NAME, OPTS, N1, N2, N3, N4 )
 * 
 *       .. Scalar Arguments ..
-*       CHARACTER*( * )    NAME, OPTS
+*       CHARACTER(LEN=*)    NAME, OPTS
 *       INTEGER            ISPEC, N1, N2, N3, N4
 *       ..
 *  
@@ -88,14 +88,14 @@
 *>
 *> \param[in] NAME
 *> \verbatim
-*>          NAME is CHARACTER*(*)
+*>          NAME is CHARACTER(LEN=*)
 *>          The name of the calling subroutine, in either upper case or
 *>          lower case.
 *> \endverbatim
 *>
 *> \param[in] OPTS
 *> \verbatim
-*>          OPTS is CHARACTER*(*)
+*>          OPTS is CHARACTER(LEN=*)
 *>          The character options to the subroutine NAME, concatenated
 *>          into a single character string.  For example, UPLO = 'U',
 *>          TRANS = 'T', and DIAG = 'N' for a triangular routine would
@@ -168,7 +168,7 @@
 *     November 2011
 *
 *     .. Scalar Arguments ..
-      CHARACTER*( * )    NAME, OPTS
+      CHARACTER(LEN=*)    NAME, OPTS
       INTEGER            ISPEC, N1, N2, N3, N4
 *     ..
 *
@@ -177,7 +177,10 @@
 *     .. Local Scalars ..
       INTEGER            I, IC, IZ, NB, NBMIN, NX
       LOGICAL            CNAME, SNAME
-      CHARACTER          C1*1, C2*2, C4*2, C3*3, SUBNAM*6
+      CHARACTER(LEN=1) C1
+      CHARACTER(LEN=2) C2, C4
+      CHARACTER(LEN=3) C3
+      CHARACTER(LEN=6) SUBNAM
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          CHAR, ICHAR, INT, MIN, REAL
@@ -188,8 +191,27 @@
 *     ..
 *     .. Executable Statements ..
 *
-      GO TO ( 10, 10, 10, 80, 90, 100, 110, 120,
-     $        130, 140, 150, 160, 160, 160, 160, 160 )ISPEC
+      IF( ISPEC.LE.3 ) THEN
+         GO TO 10
+      ELSE IF( ISPEC.EQ.4 ) THEN
+         GO TO 80
+      ELSE IF( ISPEC.EQ.5 ) THEN
+         GO TO 90
+      ELSE IF( ISPEC.EQ.6 ) THEN
+         GO TO 100
+      ELSE IF( ISPEC.EQ.7 ) THEN
+         GO TO 110
+      ELSE IF( ISPEC.EQ.8 ) THEN
+         GO TO 120
+      ELSE IF( ISPEC.EQ.9 ) THEN
+         GO TO 130
+      ELSE IF( ISPEC.EQ.10 ) THEN
+         GO TO 140
+      ELSE IF( ISPEC.EQ.11 ) THEN
+         GO TO 150
+      ELSE IF( ISPEC.GE.12 ) THEN
+         GO TO 160
+      END IF
 *
 *     Invalid value for ISPEC
 *
@@ -257,7 +279,13 @@
       C3 = SUBNAM( 4: 6 )
       C4 = C3( 2: 3 )
 *
-      GO TO ( 50, 60, 70 )ISPEC
+      IF( ISPEC.EQ.1 ) THEN
+         GO TO 50
+      ELSE IF( ISPEC.EQ.2 ) THEN
+         GO TO 60
+      ELSE IF( ISPEC.EQ.3 ) THEN
+         GO TO 70
+      END IF
 *
    50 CONTINUE
 *

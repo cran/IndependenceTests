@@ -320,8 +320,8 @@ extern "C" {
 	somme2 = 0;
 	for (j=1; j<=((int)M[i-1][1]/4); j=j+1) {
 	  for (k=1; k<=4; k=k+1) {
-	    points[(somme+somme2+k-1) * q[0]] = M[i-1][2] * cos((k-1)*PI/2.0);
-	    points[(somme+somme2+k-1) * q[0] + 1] = M[i-1][2] * sin((k-1)*PI/2.0);
+	    points[(somme+somme2+k-1) * q[0]] = M[i-1][2] * cos((k-1)*pi/2.0);
+	    points[(somme+somme2+k-1) * q[0] + 1] = M[i-1][2] * sin((k-1)*pi/2.0);
 	  }
 	  somme2 = somme2+((int)M[i-1][1])/4;
 	}	
@@ -382,8 +382,8 @@ extern "C" {
 	  {
 	    for (k=1; k<=4; k=k+1)
 	      {
-		points[(somme+somme2+k-1) * q[0]] = M[i-1][2] * cos((k-1)*PI/2.0);
-		points[(somme+somme2+k-1) * q[0] + 1] = M[i-1][2] * sin((k-1)*PI/2.0);
+		points[(somme+somme2+k-1) * q[0]] = M[i-1][2] * cos((k-1)*pi/2.0);
+		points[(somme+somme2+k-1) * q[0] + 1] = M[i-1][2] * sin((k-1)*pi/2.0);
 	      }
 	    somme2 = somme2 + ((int)M[i-1][1])/4;
 	  }
@@ -393,7 +393,7 @@ extern "C" {
     }
 
 
-    for (j=1; j<=N[0]; j=j+1) weights[j-1] = pow(PI,(-q[0]/2.0)) * weights[j-1];
+    for (j=1; j<=N[0]; j=j+1) weights[j-1] = pow(pi,(-q[0]/2.0)) * weights[j-1];
   
     for (i=0; i<(N[0]*q[0]); i++) points[i] = sqrt(2.0) * a[0] * points[i];
 
@@ -458,7 +458,7 @@ extern "C" {
       binarycode(i,q[0],y);
       for (j=1;j<=q[0];j=j+1) pointsC[(j-1)*((int)pow((double)2,(double)q[0]))+i] = sval * pow((double)(-1),y[j-1]);
     }
-  delete y;
+  delete[] y;
 
       
 for (i=1;i<=q[0]-1;i=i+1) {

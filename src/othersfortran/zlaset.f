@@ -23,10 +23,10 @@
 *       .. Scalar Arguments ..
 *       CHARACTER          UPLO
 *       INTEGER            LDA, M, N
-*       COMPLEX*16         ALPHA, BETA
+*       DOUBLE COMPLEX         ALPHA, BETA
 *       ..
 *       .. Array Arguments ..
-*       COMPLEX*16         A( LDA, * )
+*       DOUBLE COMPLEX         A( LDA, * )
 *       ..
 *  
 *
@@ -44,7 +44,7 @@
 *
 *> \param[in] UPLO
 *> \verbatim
-*>          UPLO is CHARACTER*1
+*>          UPLO is CHARACTER(LEN=1)
 *>          Specifies the part of the matrix A to be set.
 *>          = 'U':      Upper triangular part is set. The lower triangle
 *>                      is unchanged.
@@ -67,19 +67,19 @@
 *>
 *> \param[in] ALPHA
 *> \verbatim
-*>          ALPHA is COMPLEX*16
+*>          ALPHA is DOUBLE COMPLEX
 *>          All the offdiagonal array elements are set to ALPHA.
 *> \endverbatim
 *>
 *> \param[in] BETA
 *> \verbatim
-*>          BETA is COMPLEX*16
+*>          BETA is DOUBLE COMPLEX
 *>          All the diagonal array elements are set to BETA.
 *> \endverbatim
 *>
 *> \param[in,out] A
 *> \verbatim
-*>          A is COMPLEX*16 array, dimension (LDA,N)
+*>          A is DOUBLE COMPLEX array, dimension (LDA,N)
 *>          On entry, the m by n matrix A.
 *>          On exit, A(i,j) = ALPHA, 1 <= i <= m, 1 <= j <= n, i.ne.j;
 *>                   A(i,i) = BETA , 1 <= i <= min(m,n)
@@ -114,10 +114,10 @@
 *     .. Scalar Arguments ..
       CHARACTER          UPLO
       INTEGER            LDA, M, N
-      COMPLEX*16         ALPHA, BETA
+      DOUBLE COMPLEX         ALPHA, BETA
 *     ..
 *     .. Array Arguments ..
-      COMPLEX*16         A( LDA, * )
+      DOUBLE COMPLEX         A( LDA, * )
 *     ..
 *
 *  =====================================================================

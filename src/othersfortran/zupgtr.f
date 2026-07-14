@@ -25,7 +25,7 @@
 *       INTEGER            INFO, LDQ, N
 *       ..
 *       .. Array Arguments ..
-*       COMPLEX*16         AP( * ), Q( LDQ, * ), TAU( * ), WORK( * )
+*       DOUBLE COMPLEX         AP( * ), Q( LDQ, * ), TAU( * ), WORK( * )
 *       ..
 *  
 *
@@ -48,7 +48,7 @@
 *
 *> \param[in] UPLO
 *> \verbatim
-*>          UPLO is CHARACTER*1
+*>          UPLO is CHARACTER(LEN=1)
 *>          = 'U': Upper triangular packed storage used in previous
 *>                 call to ZHPTRD;
 *>          = 'L': Lower triangular packed storage used in previous
@@ -63,21 +63,21 @@
 *>
 *> \param[in] AP
 *> \verbatim
-*>          AP is COMPLEX*16 array, dimension (N*(N+1)/2)
+*>          AP is DOUBLE COMPLEX array, dimension (N*(N+1)/2)
 *>          The vectors which define the elementary reflectors, as
 *>          returned by ZHPTRD.
 *> \endverbatim
 *>
 *> \param[in] TAU
 *> \verbatim
-*>          TAU is COMPLEX*16 array, dimension (N-1)
+*>          TAU is DOUBLE COMPLEX array, dimension (N-1)
 *>          TAU(i) must contain the scalar factor of the elementary
 *>          reflector H(i), as returned by ZHPTRD.
 *> \endverbatim
 *>
 *> \param[out] Q
 *> \verbatim
-*>          Q is COMPLEX*16 array, dimension (LDQ,N)
+*>          Q is DOUBLE COMPLEX array, dimension (LDQ,N)
 *>          The N-by-N unitary matrix Q.
 *> \endverbatim
 *>
@@ -89,7 +89,7 @@
 *>
 *> \param[out] WORK
 *> \verbatim
-*>          WORK is COMPLEX*16 array, dimension (N-1)
+*>          WORK is DOUBLE COMPLEX array, dimension (N-1)
 *> \endverbatim
 *>
 *> \param[out] INFO
@@ -124,13 +124,13 @@
       INTEGER            INFO, LDQ, N
 *     ..
 *     .. Array Arguments ..
-      COMPLEX*16         AP( * ), Q( LDQ, * ), TAU( * ), WORK( * )
+      DOUBLE COMPLEX         AP( * ), Q( LDQ, * ), TAU( * ), WORK( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      COMPLEX*16         CZERO, CONE
+      DOUBLE COMPLEX         CZERO, CONE
       PARAMETER          ( CZERO = ( 0.0D+0, 0.0D+0 ),
      $                   CONE = ( 1.0D+0, 0.0D+0 ) )
 *     ..

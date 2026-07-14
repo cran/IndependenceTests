@@ -26,7 +26,7 @@
 *       ..
 *       .. Array Arguments ..
 *       DOUBLE PRECISION   WORK( * )
-*       COMPLEX*16         AP( * )
+*       DOUBLE COMPLEX         AP( * )
 *       ..
 *  
 *
@@ -62,14 +62,14 @@
 *
 *> \param[in] NORM
 *> \verbatim
-*>          NORM is CHARACTER*1
+*>          NORM is CHARACTER(LEN=1)
 *>          Specifies the value to be returned in ZLANHP as described
 *>          above.
 *> \endverbatim
 *>
 *> \param[in] UPLO
 *> \verbatim
-*>          UPLO is CHARACTER*1
+*>          UPLO is CHARACTER(LEN=1)
 *>          Specifies whether the upper or lower triangular part of the
 *>          hermitian matrix A is supplied.
 *>          = 'U':  Upper triangular part of A is supplied
@@ -85,7 +85,7 @@
 *>
 *> \param[in] AP
 *> \verbatim
-*>          AP is COMPLEX*16 array, dimension (N*(N+1)/2)
+*>          AP is DOUBLE COMPLEX array, dimension (N*(N+1)/2)
 *>          The upper or lower triangle of the hermitian matrix A, packed
 *>          columnwise in a linear array.  The j-th column of A is stored
 *>          in the array AP as follows:
@@ -128,7 +128,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   WORK( * )
-      COMPLEX*16         AP( * )
+      DOUBLE COMPLEX         AP( * )
 *     ..
 *
 * =====================================================================

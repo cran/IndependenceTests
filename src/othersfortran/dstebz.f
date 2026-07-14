@@ -57,7 +57,7 @@
 *
 *> \param[in] RANGE
 *> \verbatim
-*>          RANGE is CHARACTER*1
+*>          RANGE is CHARACTER(LEN=1)
 *>          = 'A': ("All")   all eigenvalues will be found.
 *>          = 'V': ("Value") all eigenvalues in the half-open interval
 *>                           (VL, VU] will be found.
@@ -67,7 +67,7 @@
 *>
 *> \param[in] ORDER
 *> \verbatim
-*>          ORDER is CHARACTER*1
+*>          ORDER is CHARACTER(LEN=1)
 *>          = 'B': ("By Block") the eigenvalues will be grouped by
 *>                              split-off block (see IBLOCK, ISPLIT) and
 *>                              ordered from smallest to largest within

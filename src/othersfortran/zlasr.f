@@ -26,7 +26,7 @@
 *       ..
 *       .. Array Arguments ..
 *       DOUBLE PRECISION   C( * ), S( * )
-*       COMPLEX*16         A( LDA, * )
+*       DOUBLE COMPLEX         A( LDA, * )
 *       ..
 *  
 *
@@ -113,7 +113,7 @@
 *
 *> \param[in] SIDE
 *> \verbatim
-*>          SIDE is CHARACTER*1
+*>          SIDE is CHARACTER(LEN=1)
 *>          Specifies whether the plane rotation matrix P is applied to
 *>          A on the left or the right.
 *>          = 'L':  Left, compute A := P*A
@@ -122,7 +122,7 @@
 *>
 *> \param[in] PIVOT
 *> \verbatim
-*>          PIVOT is CHARACTER*1
+*>          PIVOT is CHARACTER(LEN=1)
 *>          Specifies the plane for which P(k) is a plane rotation
 *>          matrix.
 *>          = 'V':  Variable pivot, the plane (k,k+1)
@@ -132,7 +132,7 @@
 *>
 *> \param[in] DIRECT
 *> \verbatim
-*>          DIRECT is CHARACTER*1
+*>          DIRECT is CHARACTER(LEN=1)
 *>          Specifies whether P is a forward or backward sequence of
 *>          plane rotations.
 *>          = 'F':  Forward, P = P(z-1)*...*P(2)*P(1)
@@ -174,7 +174,7 @@
 *>
 *> \param[in,out] A
 *> \verbatim
-*>          A is COMPLEX*16 array, dimension (LDA,N)
+*>          A is DOUBLE COMPLEX array, dimension (LDA,N)
 *>          The M-by-N matrix A.  On exit, A is overwritten by P*A if
 *>          SIDE = 'R' or by A*P**T if SIDE = 'L'.
 *> \endverbatim
@@ -211,7 +211,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   C( * ), S( * )
-      COMPLEX*16         A( LDA, * )
+      DOUBLE COMPLEX         A( LDA, * )
 *     ..
 *
 *  =====================================================================
@@ -223,7 +223,7 @@
 *     .. Local Scalars ..
       INTEGER            I, INFO, J
       DOUBLE PRECISION   CTEMP, STEMP
-      COMPLEX*16         TEMP
+      DOUBLE COMPLEX         TEMP
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          MAX

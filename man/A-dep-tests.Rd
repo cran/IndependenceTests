@@ -33,8 +33,8 @@ A.dep.tests(Xmat, choice = 1, d = 0, m = d, freqname = "", type = "text")
     matrix or a data-frame to identify the variable for the counts (frequencies).}
   \item{type}{"text" or "html"}
 }
-\value{Returns an object of class \code{list} containing the following
-  components:
+\value{Returns an object of class \code{A.dep.tests}, inheriting from \code{list},
+  with a \code{print} method. The object contains the following components:
   \item{TA}{\eqn{A}-dependence statistics for each subset \eqn{A} of variables.}
   \item{fA}{degrees of freedom of the \eqn{A}-dependence statistics.}
   \item{pvalA}{\eqn{p}-values of the \eqn{A}-dependence statistics.}

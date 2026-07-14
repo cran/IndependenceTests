@@ -153,26 +153,51 @@ A.dep.tests <- function(Xmat,choice=1,d=0,m=d,freqname="",type="text") {
   if (choice==1) rownames(X2tmp) <- c("A",Anames,"","X2") else rownames(X2tmp) <- c("A",Anames,"","Y2")
 
 
-  if (type=="html") {
-#    require(xtable)
-    sortie <- cbind(subset=rownames(X),round(X,2))
-    sortie <- rbind(sortie,c("",sortie[nrow(sortie),2:4]))
-    if (choice==1) {sortie[nrow(sortie)-1,] <- c("<B>all</B>","<B>X<sup>2</sup></B>","<B>total</B>","<B>p.value</B>")}
-    if (choice==2) {sortie[nrow(sortie)-1,] <- c("<B>all</B>","<B>Y<sup>2</sup></B>","<B>total</B>","<B>p.value</B>")}
-    print(xtable(data.frame(sortie)),type="html",include.rownames=FALSE)
-  }
-  else {
-    print(data.frame(X2tmp))
-  }
-  cat("\n")
-  
-  if (choice == 1) {
-    return(invisible(c(res,list(X=X,X2=M,f=fM,pval=pvalM))))
+  ans <- if (choice == 1) {
+    c(res, list(X = X, X2 = M, f = fM, pval = pvalM))
   } else {
-    return(invisible(c(res,list(X=X,Y2=M,f=fM,pval=pvalM))))
+    c(res, list(X = X, Y2 = M, f = fM, pval = pvalM))
   }
-  
+
+  ans$print.table <- X2tmp
+  ans$type <- type
+  ans$choice <- choice
+  ans$X.summary <- X
+
+  class(ans) <- "A.dep.tests"
+  ans
+      
 }
 
 
 
+print.A.dep.tests <- function(x, ...) {
+  if (identical(x$type, "html")) {
+    sortie <- cbind(subset = rownames(x$X.summary), round(x$X.summary, 2))
+    sortie <- rbind(sortie, c("", sortie[nrow(sortie), 2:4]))
+
+    if (x$choice == 1) {
+      sortie[nrow(sortie) - 1, ] <- c(
+        "<B>all</B>",
+        "<B>X<sup>2</sup></B>",
+        "<B>total</B>",
+        "<B>p.value</B>"
+      )
+    }
+
+    if (x$choice == 2) {
+      sortie[nrow(sortie) - 1, ] <- c(
+        "<B>all</B>",
+        "<B>Y<sup>2</sup></B>",
+        "<B>total</B>",
+        "<B>p.value</B>"
+      )
+    }
+
+    print(xtable(data.frame(sortie)), type = "html", include.rownames = FALSE)
+  } else {
+    print(data.frame(x$print.table))
+  }
+
+  invisible(x)
+}
