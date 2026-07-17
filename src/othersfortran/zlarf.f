@@ -136,16 +136,16 @@
 *     .. Scalar Arguments ..
       CHARACTER          SIDE
       INTEGER            INCV, LDC, M, N
-      DOUBLE COMPLEX         TAU
+      COMPLEX(KIND(0D0))         TAU
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         C( LDC, * ), V( * ), WORK( * )
+      COMPLEX(KIND(0D0))         C( LDC, * ), V( * ), WORK( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE COMPLEX         ONE, ZERO
+      COMPLEX(KIND(0D0))         ONE, ZERO
       PARAMETER          ( ONE = ( 1.0D+0, 0.0D+0 ),
      $                   ZERO = ( 0.0D+0, 0.0D+0 ) )
 *     ..

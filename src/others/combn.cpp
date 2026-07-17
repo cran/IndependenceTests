@@ -9,7 +9,7 @@ Auteur: Pierre Lafaye de Micheaux
 Date: 09/11/2005
 -----
 
-Entrées:
+EntrÃ©es:
 --------
 
     int *combmat: 
@@ -19,10 +19,10 @@ Entrées:
 Sorties:
 --------
 
-    Le pointeur modifié est *combmat. La fonction ne renvoie rien.
-    *combmat contiendra le vecteur constitué de la concaténation des colonnes de la matrice m x Cnm des combinaisons des elements de seq(n) pris m à la fois.
+    Le pointeur modifiÃ© est *combmat. La fonction ne renvoie rien.
+    *combmat contiendra le vecteur constituÃ© de la concatÃ©nation des colonnes de la matrice m x Cnm des combinaisons des elements de seq(n) pris m Ã  la fois.
 
-Fonctions extérieures appelées:
+Fonctions extÃ©rieures appelÃ©es:
 -------------------------------
 
     Cnp
@@ -30,10 +30,10 @@ Fonctions extérieures appelées:
 Description:
 ------------
 
-    Generate all combinations of the elements of seq(n) taken m at a time. C'est-à-dire une matrice de taille m x Cnm.
+    Generate all combinations of the elements of seq(n) taken m at a time. C'est-Ã -dire une matrice de taille m x Cnm.
 
 
-Références:
+RÃ©fÃ©rences:
 -----------
 
     Nijenhuis, A. and Wilf, H.S. (1978) Combinatorial Algorithms for 
@@ -62,7 +62,7 @@ Instructions de compilation pour utilisation depuis R:
 g++ -I/usr/lib/R/include  -I/usr/local/include  -fPIC  -O2 -march=i686 -fomit-frame-pointer -c combn.cpp -o combn.o
 g++ -shared -L/usr/local/lib -o combn.so combn.o
 
-Pour utiliser dans R, taper source("combn.R") où le fichier normeRnAwR.R contient le code R suivant:
+Pour utiliser dans R, taper source("combn.R") oÃ¹ le fichier normeRnAwR.R contient le code R suivant:
 
 combn <- function(n,m) {
 
@@ -97,17 +97,17 @@ source("combn.R")
 
 Menu File/Open source...
 Cliquer sur Load Shared Object Library Symbols
-Sélectionner combn.cpp
+SÃ©lectionner combn.cpp
 Cliquer sur Open
 Mettre des breakpoints
-Dans la fenêtre Execution Window de R, taper: 
+Dans la fenÃªtre Execution Window de R, taper: 
 
 combn(5,3)
 
 Fin des commentaires */
 
 
-// Inclusion de librairies et de fonctions extérieures
+// Inclusion de librairies et de fonctions extÃ©rieures
 //----------------------------------------------------
 
 #include <iostream>
@@ -237,7 +237,7 @@ void combn(int *combmat, int *n, int *m)
 			  }
 
 	}
-	//On libère de la mémoire
+	//On libÃ¨re de la mÃ©moire
 	delete[] a;
 }
 

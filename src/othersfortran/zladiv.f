@@ -62,7 +62,7 @@
 *> \ingroup complex16OTHERauxiliary
 *
 *  =====================================================================
-      DOUBLE COMPLEX     FUNCTION ZLADIV( X, Y )
+      COMPLEX(KIND(0D0))     FUNCTION ZLADIV( X, Y )
 *
 *  -- LAPACK auxiliary routine (version 3.4.2) --
 *  -- LAPACK is a software package provided by Univ. of Tennessee,    --
@@ -70,7 +70,7 @@
 *     September 2012
 *
 *     .. Scalar Arguments ..
-      DOUBLE COMPLEX         X, Y
+      COMPLEX(KIND(0D0))         X, Y
 *     ..
 *
 *  =====================================================================
@@ -82,13 +82,13 @@
       EXTERNAL           DLADIV
 *     ..
 *     .. Intrinsic Functions ..
-      INTRINSIC          DBLE, DCMPLX, DIMAG
+      INTRINSIC          DBLE, CMPLX, AIMAG
 *     ..
 *     .. Executable Statements ..
 *
-      CALL DLADIV( DBLE( X ), DIMAG( X ), DBLE( Y ), DIMAG( Y ), ZR,
-     $             ZI )
-      ZLADIV = DCMPLX( ZR, ZI )
+      CALL DLADIV( DBLE( X ), AIMAG( X ), DBLE( Y ), AIMAG( Y ), 
+     $             ZR, ZI )
+      ZLADIV = CMPLX( ZR, ZI, KIND(0D0))
 *
       RETURN
 *

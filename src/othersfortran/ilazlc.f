@@ -87,13 +87,13 @@
       INTEGER            M, N, LDA
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         A( LDA, * )
+      COMPLEX(KIND(0D0))         A( LDA, * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE COMPLEX       ZERO
+      COMPLEX(KIND(0D0))       ZERO
       PARAMETER ( ZERO = (0.0D+0, 0.0D+0) )
 *     ..
 *     .. Local Scalars ..

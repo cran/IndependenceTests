@@ -123,13 +123,13 @@
       INTEGER            INFO, K, LDA, M, N
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         A( LDA, * ), TAU( * ), WORK( * )
+      COMPLEX(KIND(0D0))         A( LDA, * ), TAU( * ), WORK( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE COMPLEX         ONE, ZERO
+      COMPLEX(KIND(0D0))         ONE, ZERO
       PARAMETER          ( ONE = ( 1.0D+0, 0.0D+0 ),
      $                   ZERO = ( 0.0D+0, 0.0D+0 ) )
 *     ..

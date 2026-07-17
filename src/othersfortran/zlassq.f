@@ -116,7 +116,7 @@
       DOUBLE PRECISION   SCALE, SUMSQ
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         X( * )
+      COMPLEX(KIND(0D0))         X( * )
 *     ..
 *
 * =====================================================================
@@ -134,7 +134,7 @@
       EXTERNAL           DISNAN
 *     ..
 *     .. Intrinsic Functions ..
-      INTRINSIC          ABS, DBLE, DIMAG
+      INTRINSIC          ABS, DBLE, AIMAG
 *     ..
 *     .. Executable Statements ..
 *
@@ -149,7 +149,7 @@
                   SUMSQ = SUMSQ + ( TEMP1 / SCALE )**2
                END IF
             END IF
-            TEMP1 = ABS( DIMAG( X( IX ) ) )
+            TEMP1 = ABS( AIMAG( X( IX ) ) )
             IF( TEMP1.GT.ZERO.OR.DISNAN( TEMP1 ) ) THEN
                IF( SCALE.LT.TEMP1 ) THEN
                   SUMSQ = 1 + SUMSQ*( SCALE / TEMP1 )**2

@@ -9,26 +9,26 @@ Auteur: Pierre Lafaye de Micheaux
 Date: 21/11/2005
 -----
 
-EntrÈes:
+Entr√©es:
 --------
 
-    int *N: nombre de points de la discrÈtisation de (0,PI)
-    int *vecd: (d_1,d_2,...,d_p) o˘ les d_j sont des entiers
-    int *p: nombre de vecteurs alÈatoires dont on veut tester l'indÈpendance
-    double *X: matrice des donnÈes: n lignes et sum(vecd) colonnes
+    int *N: nombre de points de la discr√©tisation de (0,PI)
+    int *vecd: (d_1,d_2,...,d_p) o√π les d_j sont des entiers
+    int *p: nombre de vecteurs al√©atoires dont on veut tester l'ind√©pendance
+    double *X: matrice des donn√©es: n lignes et sum(vecd) colonnes
     int *n: nombre d'individus
     int *B: nombre de boucles bootstrap
     double *alpha: niveau du test
-    double *RnAs: contiendra les rÈsultats, vecteur des normes des RnA pour les diffÈrents A
-    double *RnAsetoile:  contiendra les rÈsultats, matrice des diffÈrents RnA pour tous les Xetoiles crÈÈes
-    double *Rn:  contiendra les rÈsultats, valeur de Rn
+    double *RnAs: contiendra les r√©sultats, vecteur des normes des RnA pour les diff√©rents A
+    double *RnAsetoile:  contiendra les r√©sultats, matrice des diff√©rents RnA pour tous les Xetoiles cr√©√©es
+    double *Rn:  contiendra les r√©sultats, valeur de Rn
 
 Sorties:
 --------
 
-    Les pointeurs modifiÈs sont *RnAs, *RnAsetoile et *Rn. La fonction ne renvoie rien.
+    Les pointeurs modifi√©s sont *RnAs, *RnAsetoile et *Rn. La fonction ne renvoie rien.
 
-Fonctions extÈrieures appelÈes:
+Fonctions ext√©rieures appel√©es:
 -------------------------------
 
     normeRnAwR
@@ -36,13 +36,13 @@ Fonctions extÈrieures appelÈes:
 Description:
 ------------
 
-Cette fonction calcule une approximation (due au fait des discrÈtisations donnÈes) de ||R_{n,A}|| pour tous les 2^p-p-1 choix de A (cardA>1) possibles.
-Elle calcule aussi  une approximation (due au fait des discrÈtisations donnÈes) de ||R_{n}||=\max_A ||R_{n,A}||.
-Elle calcule enfin une approximation (due au fait des discrÈtisations donnÈes) de ||R_{n,A}^*|| pour tous les 2^p-p-1 choix de A (cardA>1) possibles, et pour 
-tous les B Èchantillons (i.e. les matrices X^*) bootstrap gÈnÈrÈs.
+Cette fonction calcule une approximation (due au fait des discr√©tisations donn√©es) de ||R_{n,A}|| pour tous les 2^p-p-1 choix de A (cardA>1) possibles.
+Elle calcule aussi  une approximation (due au fait des discr√©tisations donn√©es) de ||R_{n}||=\max_A ||R_{n,A}||.
+Elle calcule enfin une approximation (due au fait des discr√©tisations donn√©es) de ||R_{n,A}^*|| pour tous les 2^p-p-1 choix de A (cardA>1) possibles, et pour 
+tous les B √©chantillons (i.e. les matrices X^*) bootstrap g√©n√©r√©s.
 L'appel depuis la fonction R trace aussi le dependogram.
 
-RÈfÈrences:
+R√©f√©rences:
 -----------
 
 Exemples:
@@ -63,16 +63,16 @@ dependogram<-function(X,vecd.or.p,N=10,B=200,alpha=0.05,compt=1) {
 
 
 if (length(vecd.or.p) > 1) {
-#on fait le cas non sÈriel
+#on fait le cas non s√©riel
 vecd<-vecd.or.p
 p<-length(vecd)
 taille<-2^p-p-1
 
 
 n<-nrow(X)
-RnAs<-normeRnAwR(X,vecd.or.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diffÈrents avec |A|>1
+RnAs<-normeRnAwR(X,vecd.or.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diff√©rents avec |A|>1
 Rn<-max(RnAs)
-#Chaque ligne de la matrice RnAsetoile contiendra un vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diffÈrents (pour la matrice Xetoile considÈrÈe)
+#Chaque ligne de la matrice RnAsetoile contiendra un vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diff√©rents (pour la matrice Xetoile consid√©r√©e)
 RnAsetoile<-matrix(0,nrow=B,ncol=taille)
 Rnetoile<-rep(0,B)
 debut<-c(1,cumsum(vecd)+1)[-length(vecd)-1]
@@ -88,7 +88,7 @@ RnAsetoile[b,]<-normeRnAwR(Xetoile,vecd,N,0,0)
 Rnetoile[b]<-max(RnAsetoile[b,])
 }
 cat("\n")
-#Ordonne les ÈlÈments de chaque colonne
+#Ordonne les √©l√©ments de chaque colonne
 matseuils<-apply(RnAsetoile,FUN=sort,MARGIN=2)
 
 
@@ -97,7 +97,7 @@ beta<-(1-alpha)^(1/taille)
 seuilscomplets<-matseuils[round((1-beta)*B),]
 #On trace une barre verticale pour chaque A de hauteur ||RnA||
 plot(RnAs,type="h",ylim=c(0,max(max(seuilscomplets),max(RnAs))+0.1),xlim=c(0,2^p-p),main="Dependogram",xlab="Subsets",ylab="||RnA||")
-#On met une Ètoile pour chaque beta-quantile de ||R_A||
+#On met une √©toile pour chaque beta-quantile de ||R_A||
 points((1:(2^p-p-1)),seuilscomplets,pch="*")
 res<-list(RnAs=RnAs,Rn=Rn,seuilscomplets=seuilscomplets)
 return(res)
@@ -107,8 +107,8 @@ return(res)
 
 
 if (length(vecd.or.p)==1) {
-#On fait le cas sÈriel
-#Attention, on a considÈrÈ que n est grand par rapport ‡ p et donc que l'on peut calculer R_{n,A} ‡ la place de S_{n,A}
+#On fait le cas s√©riel
+#Attention, on a consid√©r√© que n est grand par rapport √† p et donc que l'on peut calculer R_{n,A} √† la place de S_{n,A}
 #mais sur la matrice X de taille nprime x nprime 
 p<-vecd.or.p
 n<-nrow(X)
@@ -117,9 +117,9 @@ vecd<-q
 taille<-2^(p-1)-1
 
 
-RnAs<-normeRnAwR(X,vecd.or.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diffÈrents avec |A|>1
+RnAs<-normeRnAwR(X,vecd.or.p,N,0,1) #vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diff√©rents avec |A|>1
 Rn<-max(RnAs)
-#Chaque ligne de la matrice RnAsetoile contiendra un vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diffÈrents (pour la matrice Xetoile considÈrÈe)
+#Chaque ligne de la matrice RnAsetoile contiendra un vecteur de taille 'taille' contenant la norme de RnA pour chacun des 'taille' A diff√©rents (pour la matrice Xetoile consid√©r√©e)
 RnAsetoile<-matrix(0,nrow=B,ncol=taille)
 Rnetoile<-rep(0,B)
 for (b in 1:B) {
@@ -135,14 +135,14 @@ cat("\n")
 beta<-(1-alpha)^(1/taille)
 
 
-#Le beta-quantile de S_n,A est calculÈ en amalgamant toutes les
+#Le beta-quantile de S_n,A est calcul√© en amalgamant toutes les
 #valeurs  S_n,A^* avec |A|=k comme dans l'article
 #Il y a choose(p-1,|A|-1) ensembles A de taille |A| qui contiennent 1
 #Il faut donc prendre dans la matrice RnAsetoile des paquets de choose(p-1,|A|-1) colonnes, pour |A|=2 to p.
 #Il y aura p-1 paquets.
-#Pour chacun de ces paquets, on crÈe un vecteur vecA en prenant tous les ÈlÈments du paquet, 
+#Pour chacun de ces paquets, on cr√©e un vecteur vecA en prenant tous les √©l√©ments du paquet, 
 #puis on calcule seuilscomplets[|A|]<-vecA[round((1-beta)*B*choose(p-1,|A|-1))] pour |A|=2 to p
-#Ce vecteur seuilscomplets contiendra donc les hauteurs des barres horizontales ‡ placer sur le dependogram (une barre horizontale 
+#Ce vecteur seuilscomplets contiendra donc les hauteurs des barres horizontales √† placer sur le dependogram (une barre horizontale 
 #pour chaque |A|)
 
 seuilscomplets<-rep(0,p-1)
@@ -165,7 +165,7 @@ Leseuil<-Rnetoile[round((1-alpha)*B)]
 abline(h=Leseuil,col="red")
 
 
-##Il reste ‡ placer les lignes horizontales des seuils critiques pour chaque |A|
+##Il reste √† placer les lignes horizontales des seuils critiques pour chaque |A|
 
 
 begin<-1
@@ -209,17 +209,17 @@ Instructions de compilation pour utilisation depuis R:
 g++ -I/usr/lib/R/include  -I/usr/local/include  -fPIC  -O2 -march=i686 -fomit-frame-pointer -c dependogram.cpp -o dependogram.o
 g++ -shared -L/usr/local/lib -o dependogram.so dependogram.o 
 
-Pour utiliser dans R, taper source("dependogram.R") o˘ le fichier dependogram.R contient le code R suivant:
+Pour utiliser dans R, taper source("dependogram.R") o√π le fichier dependogram.R contient le code R suivant:
  
 
 dependogram <- function(X,vecd.or.p,N=10,B=200,alpha=0.05,affiche=1) {
 
 X<-as.matrix(X)
 
-#si length(vecd.or.p)>1 alors cas non sÈriel sinon cas sÈriel
+#si length(vecd.or.p)>1 alors cas non s√©riel sinon cas s√©riel
 
 if (length(vecd.or.p) > 1) {
-#on fait le cas non sÈriel
+#on fait le cas non s√©riel
 seriel<-0
 vecd<-vecd.or.p
 p<-length(vecd)
@@ -233,11 +233,11 @@ taille<-2^p-p-1
 		Rn<-0
 		Rnetoile<-rep(0,B)
 
-#On charge la fonction C dans la mÈmoire
+#On charge la fonction C dans la m√©moire
 	     dyn.load(paste("dependogram", .Platform$dynlib.ext, sep=""))
 
-#Remarque: quand on passe une matrice dans la fonction .C elle est reÁue comme un vecteur obtenu en concatÈnant les colonnes de cette matrice
-#et le rÈsultat est lui aussi renvoyÈ sous la forme d'un tel vecteur
+#Remarque: quand on passe une matrice dans la fonction .C elle est re√ßue comme un vecteur obtenu en concat√©nant les colonnes de cette matrice
+#et le r√©sultat est lui aussi renvoy√© sous la forme d'un tel vecteur
 
 #On appelle la fonction C dependogram
 		out <- .C("dependogram",
@@ -257,7 +257,7 @@ taille<-2^p-p-1
 		as.integer(seriel))
 
 
-#On dÈcharge la fonction C de la mÈmoire
+#On d√©charge la fonction C de la m√©moire
 		dyn.unload(paste("dependogram", .Platform$dynlib.ext, sep=""))
 
 
@@ -279,7 +279,7 @@ cat(c("A:",RES[[cardA]][,j],"||RnA||:",round(out$RnAs[nb],3),"\n"))
 }
 
 
-#Ordonne les ÈlÈments de chaque ligne
+#Ordonne les √©l√©ments de chaque ligne
 RnAsetoile<-matrix(out$RnAsetoile,nrow=(2^p-p-1),ncol=B,byrow=F)
 matseuils<-t(apply(RnAsetoile,FUN=sort,MARGIN=1))
 
@@ -295,7 +295,7 @@ Leseuil<-Rnetoile[round((1-alpha)*B)]
 abline(h=Leseuil,col="red")
 
 
-#On met une Ètoile pour chaque beta-quantile de ||R_A||
+#On met une √©toile pour chaque beta-quantile de ||R_A||
 points((1:(2^p-p-1)),seuilscomplets,pch="*")
 res<-list(RnAs=out$RnAs,Rn=out$Rn,seuilscomplets=seuilscomplets,Leseuil=Leseuil)
 return(res)
@@ -306,7 +306,7 @@ return(res)
 
 
 if (length(vecd.or.p) == 1) {
-#on fait le cas non sÈriel
+#on fait le cas non s√©riel
 seriel<-1
 p<-vecd.or.p
 vecd<-rep(ncol(X),p)
@@ -320,11 +320,11 @@ taille<-2^(p-1)-1
 		Rn<-0
 		Rnetoile<-rep(0,B)
 
-#On charge la fonction C dans la mÈmoire
+#On charge la fonction C dans la m√©moire
 	     dyn.load(paste("dependogram", .Platform$dynlib.ext, sep=""))
 
-#Remarque: quand on passe une matrice dans la fonction .C elle est reÁue comme un vecteur obtenu en concatÈnant les colonnes de cette matrice
-#et le rÈsultat est lui aussi renvoyÈ sous la forme d'un tel vecteur
+#Remarque: quand on passe une matrice dans la fonction .C elle est re√ßue comme un vecteur obtenu en concat√©nant les colonnes de cette matrice
+#et le r√©sultat est lui aussi renvoy√© sous la forme d'un tel vecteur
 
 #On appelle la fonction C dependogram
 		out <- .C("dependogram",
@@ -344,7 +344,7 @@ taille<-2^(p-1)-1
 		as.integer(seriel))
 
 
-#On dÈcharge la fonction C de la mÈmoire
+#On d√©charge la fonction C de la m√©moire
 		dyn.unload(paste("dependogram", .Platform$dynlib.ext, sep=""))
 
 
@@ -372,14 +372,14 @@ Rn<-max(out$RnAs)
 beta<-(1-alpha)^(1/taille)
 
 
-#Le beta-quantile de S_n,A est calculÈ en amalgamant toutes les
+#Le beta-quantile de S_n,A est calcul√© en amalgamant toutes les
 #valeurs  S_n,A^* avec |A|=k comme dans l'article
 #Il y a choose(p-1,|A|-1) ensembles A de taille |A| qui contiennent 1
 #Il faut donc prendre dans la matrice RnAsetoile des paquets de choose(p-1,|A|-1) lignes, pour |A|=2 to p.
 #Il y aura p-1 paquets.
-#Pour chacun de ces paquets, on crÈe un vecteur vecA en prenant tous les ÈlÈments du paquet, 
+#Pour chacun de ces paquets, on cr√©e un vecteur vecA en prenant tous les √©l√©ments du paquet, 
 #puis on calcule seuilscomplets[|A|]<-vecA[round(beta*B*choose(p-1,|A|-1))] pour |A|=2 to p
-#Ce vecteur seuilscomplets contiendra donc les hauteurs des barres horizontales ‡ placer sur le dependogram (une barre horizontale 
+#Ce vecteur seuilscomplets contiendra donc les hauteurs des barres horizontales √† placer sur le dependogram (une barre horizontale 
 #pour chaque |A|)
 
 seuilscomplets<-rep(0,p-1)
@@ -403,7 +403,7 @@ Leseuil<-Rnetoile[round((1-alpha)*B)]
 abline(h=Leseuil,col="red")
 
 
-##Il reste ‡ placer les lignes horizontales des seuils critiques pour chaque |A|
+##Il reste √† placer les lignes horizontales des seuils critiques pour chaque |A|
 
 
 begin<-1
@@ -455,10 +455,10 @@ dyn.load(paste("dependogram", .Platform$dynlib.ext, sep=""))
 
 Menu File/Open source...
 Cliquer sur Load Shared Object Library Symbols
-SÈlectionner dependogram.cpp
+S√©lectionner dependogram.cpp
 Cliquer sur Open
 Mettre des breakpoints
-Dans la fenÍtre Execution Window de R, taper: 
+Dans la fen√™tre Execution Window de R, taper: 
 
 source("dependogram.R")
 N<-10
@@ -470,7 +470,7 @@ Fin des commentaires */
 
 
 
-// Inclusion de librairies et de fonctions extÈrieures
+// Inclusion de librairies et de fonctions ext√©rieures
 //----------------------------------------------------
 
 #include <iostream>
@@ -500,7 +500,7 @@ extern "C" {
 
      void dependogram(int *N, int *vecd, int *p, double *X, int *n, int *q, int *B, double *alpha, double *RnAs, double *RnAsetoile, double *Rn);
  
-    //DÈclaration des variables
+    //D√©claration des variables
      int i, j;
     int *N;
     int *vecd, *p;
@@ -512,16 +512,16 @@ extern "C" {
 
     //Initialisation des variables
     N=new int[1];
-    *(N+0)=10;     //N: nombre de points de la discrÈtisation
+    *(N+0)=10;     //N: nombre de points de la discr√©tisation
     p=new int[1];
     *(p+0)=2;     //longueur de vecd
     vecd = new int[*(p+0)];
-    *(vecd+0)=3;     //vecd=(d_1,d_2,...,d_p) o˘ les d_j sont des entiers
+    *(vecd+0)=3;     //vecd=(d_1,d_2,...,d_p) o√π les d_j sont des entiers
     *(vecd+1)=2;   
     n=new int[1];
     *(n+0)=3;
     nbcol=5;
-    X = new double[*(n+0)*nbcol];     //X est la matrice des donnÈes: n lignes et sum(vecd)=nbcol colonnes, remplie par colonnes
+    X = new double[*(n+0)*nbcol];     //X est la matrice des donn√©es: n lignes et sum(vecd)=nbcol colonnes, remplie par colonnes
     *(X+0)=0.7;*(X+1)=0.4;*(X+2)=0.1;*(X+3)=0.8;*(X+4)=0.4;*(X+5)=0.13;
     *(X+6)=3.7;*(X+7)=0.4;*(X+8)=2.1;*(X+9)=1.8;
     *(X+10)=0.1;*(X+11)=0.1;*(X+12)=0.7;*(X+13)=0.2;*(X+14)=0.1;    
@@ -541,7 +541,7 @@ extern "C" {
     dependogram(N, vecd, p, X, n, B, alpha, RnAs, RnAsetoile, Rn);
 
 
-    //Affichage des rÈsultats
+    //Affichage des r√©sultats
     cout << "RnAs:\n";
     for (i = 1; i <= (int)pow(2.0,*(p+0))-*(p+0)-1; i++) {
       cout << *(RnAs+i-1) << " ";
@@ -600,7 +600,7 @@ extern "C" {
 
     GetRNGstate();
 
-    //DÈclaration des variables
+    //D√©claration des variables
     double *compt;
     int i, b, j, l;
     int *debut, *fin;
@@ -609,7 +609,7 @@ extern "C" {
     int lg,col;
     double *resul;
     double max;
-    long *idum; //seed pour le gÈnÈrateur
+    long *idum; //seed pour le g√©n√©rateur
 
    //Initialisation des variables
     int taille;
@@ -636,7 +636,7 @@ extern "C" {
     *(idum+0)=-1;
     //    *(idum+0)=-time(NULL);
 
-    // RnAs: vecteur de taille 2^p-p-1 contenant la norme de RnA pour chacun des 2^p-p-1 A diffÈrents avec |A|>1
+    // RnAs: vecteur de taille 2^p-p-1 contenant la norme de RnA pour chacun des 2^p-p-1 A diff√©rents avec |A|>1
     normeRnAwR(N, vecd, lenvecd, p, X, n, q, RnAs, compt, seriel);
 
     //Rn=max(RnAs)
@@ -649,7 +649,7 @@ extern "C" {
 
     /*
 
-#Chaque colonne de la matrice RnAsetoile contiendra un vecteur de taille 2^p-p-1 contenant la norme de RnA pour chacun des 2^p-p-1 A diffÈrents (pour la matrice Xetoile considÈrÈe)
+#Chaque colonne de la matrice RnAsetoile contiendra un vecteur de taille 2^p-p-1 contenant la norme de RnA pour chacun des 2^p-p-1 A diff√©rents (pour la matrice Xetoile consid√©r√©e)
 RnAsetoile<-matrix(0,nrow=(2^p-p-1),ncol=B)
 Rnetoile<-rep(0,B)
 
@@ -678,7 +678,7 @@ Rnetoile<-rep(0,B)
                                    	
 	  *(aj+l-1) = 1 + (int)(runif(0.0,1.0)*n[0]);                  //randint(1,*(n+0),idum);
 
-	} //aj est maintenant dÈfini
+	} //aj est maintenant d√©fini
 
 
 
@@ -706,7 +706,7 @@ Rnetoile<-rep(0,B)
 	  *(aj+l-1) = 1 + (int)(runif(0.0,1.0)*n[0]);                  //randint(1,*(n+0),idum);
 	  //	*(aj+l-1)=randint(1,*(n+0),idum);
 
-	} //aj est maintenant dÈfini
+	} //aj est maintenant d√©fini
 
 	// Xetoile<-X[aj,]
 	  for (col = 1; col <= *(q+0); col++) {
@@ -737,7 +737,7 @@ Rnetoile<-rep(0,B)
     } //fin de la boucle bootstrap
 
 
-    //On libËre de la mÈmoire
+    //On lib√®re de la m√©moire
     delete[] aj;
     delete[] resul;
     delete[] Xetoile;

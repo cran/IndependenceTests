@@ -211,7 +211,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   C( * ), S( * )
-      DOUBLE COMPLEX         A( LDA, * )
+      COMPLEX(KIND(0D0))         A( LDA, * )
 *     ..
 *
 *  =====================================================================
@@ -223,7 +223,7 @@
 *     .. Local Scalars ..
       INTEGER            I, INFO, J
       DOUBLE PRECISION   CTEMP, STEMP
-      DOUBLE COMPLEX         TEMP
+      COMPLEX(KIND(0D0))         TEMP
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          MAX

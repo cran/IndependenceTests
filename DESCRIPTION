@@ -1,8 +1,8 @@
 Package: IndependenceTests
 Type: Package
 Title: Non-Parametric Tests of Independence Between Random Vectors
-Version: 0.7
-Date: 2026-07-06
+Version: 0.8
+Date: 2026-07-16
 Authors@R: c(person("Pierre", "Lafaye De Micheaux", role = c("aut", "cre"),
 	             email = "lafaye@unsw.edu.au",
 	             comment = c(ORCID = "0000-0002-0247-5136")),
@@ -28,7 +28,6 @@ Maintainer: Pierre Lafaye De Micheaux <lafaye@unsw.edu.au>
 Description: Non-parametric tests of independence (mutual or serial) between some quantitative random vectors, as described in Bilodeau M. and Lafaye de Micheaux P. (2009) <doi:10.1016/j.jspi.2008.11.006>, in Beran R., Bilodeau M. and Lafaye de Micheaux P. (2007) <doi:10.1016/j.jmva.2007.01.009> and in Fan Y., Lafaye de Micheaux P., Penev S. and Salopek D. (2017) <doi:10.1016/j.jmva.2016.09.014>.
 License: GPL (>= 2)
 Depends: R (>= 2.6.0), xtable, CompQuadForm, MASS, Runuran, parallel
-Packaged: 2026-07-06 06:53:01 UTC; lafaye
 Copyright: For LAPACK/BLAS routines in src (Univ. of Tennessee, Univ.
         of California Berkeley, NAG Ltd., Courant Institute, Argonne
         National Lab, and Rice University).
@@ -44,5 +43,6 @@ Author: Pierre Lafaye De Micheaux [aut, cre] (ORCID:
   Richard Hanson [cph] (LAPACK/BLAS routines in src),
   Sven Hammarling [cph] (LAPACK/BLAS routines in src),
   Jeremy Du Croz [cph] (LAPACK/BLAS routines in src)
+Packaged: 2026-07-16 15:51:21 UTC; lafaye
 Repository: CRAN
-Date/Publication: 2026-07-14 16:40:18 UTC
+Date/Publication: 2026-07-17 06:30:02 UTC

@@ -113,10 +113,10 @@
 *
 *     .. Scalar Arguments ..
       INTEGER            INCX, N
-      DOUBLE COMPLEX         ALPHA, TAU
+      COMPLEX(KIND(0D0))         ALPHA, TAU
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         X( * )
+      COMPLEX(KIND(0D0))         X( * )
 *     ..
 *
 *  =====================================================================
@@ -131,11 +131,11 @@
 *     ..
 *     .. External Functions ..
       DOUBLE PRECISION   DLAMCH, DLAPY3, DZNRM2
-      DOUBLE COMPLEX         ZLADIV
+      COMPLEX(KIND(0D0))         ZLADIV
       EXTERNAL           DLAMCH, DLAPY3, DZNRM2, ZLADIV
 *     ..
 *     .. Intrinsic Functions ..
-      INTRINSIC          ABS, DBLE, DCMPLX, DIMAG, SIGN
+      INTRINSIC          ABS, DBLE, CMPLX, AIMAG, SIGN
 *     ..
 *     .. External Subroutines ..
       EXTERNAL           ZDSCAL, ZSCAL
@@ -149,7 +149,7 @@
 *
       XNORM = DZNRM2( N-1, X, INCX )
       ALPHR = DBLE( ALPHA )
-      ALPHI = DIMAG( ALPHA )
+      ALPHI = AIMAG( ALPHA )
 *
       IF( XNORM.EQ.ZERO .AND. ALPHI.EQ.ZERO ) THEN
 *
@@ -181,11 +181,13 @@
 *           New BETA is at most 1, at least SAFMIN
 *
             XNORM = DZNRM2( N-1, X, INCX )
-            ALPHA = DCMPLX( ALPHR, ALPHI )
+            ALPHA = CMPLX( ALPHR, ALPHI, KIND(0D0) )
             BETA = -SIGN( DLAPY3( ALPHR, ALPHI, XNORM ), ALPHR )
          END IF
-         TAU = DCMPLX( ( BETA-ALPHR ) / BETA, -ALPHI / BETA )
-         ALPHA = ZLADIV( DCMPLX( ONE ), ALPHA-BETA )
+         TAU = CMPLX( ( BETA-ALPHR ) / BETA, -ALPHI / BETA,
+     $   KIND(0D0) )
+         ALPHA = ZLADIV( CMPLX( ONE, ZERO, KIND(0D0) ),
+     $      ALPHA-BETA )
          CALL ZSCAL( N-1, ALPHA, X, INCX )
 *
 *        If ALPHA is subnormal, it may lose relative accuracy

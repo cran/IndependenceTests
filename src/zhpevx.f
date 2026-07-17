@@ -246,7 +246,7 @@
 *     .. Array Arguments ..
       INTEGER ifail( * ), iwork( * )
       DOUBLE PRECISION rwork( * ), w( * )
-      COMPLEX*16 ap( * ), work( * ), z( ldz, * )
+      COMPLEX(KIND(0D0)) ap( * ), work( * ), z( ldz, * )
 *     ..
 *     
 *     =====================================================================
@@ -254,7 +254,7 @@
 *     .. Parameters ..
       DOUBLE PRECISION zero, one
       parameter( zero = 0.0d0, one = 1.0d0 )
-      COMPLEX*16 cone
+      COMPLEX(KIND(0D0)) cone
       parameter( cone = ( 1.0d0, 0.0d0 ) )
 *     ..
 *     .. Local Scalars ..

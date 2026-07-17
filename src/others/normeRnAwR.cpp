@@ -9,24 +9,24 @@ Auteur: Pierre Lafaye de Micheaux
 Date: 09/11/2005
 -----
 
-Entrées:
+EntrÃ©es:
 --------
-    int *N: nombre de points de la discrétisation de (0,PI)
-    int *vecd: (d_1,d_2,...,d_p) où les d_j sont des entiers
-    int *p: nombre de vecteurs aléatoires dont on veut tester l'indépendance
-    double *X: matrice des données: n lignes et sum(vecd) colonnes
+    int *N: nombre de points de la discrÃ©tisation de (0,PI)
+    int *vecd: (d_1,d_2,...,d_p) oÃ¹ les d_j sont des entiers
+    int *p: nombre de vecteurs alÃ©atoires dont on veut tester l'indÃ©pendance
+    double *X: matrice des donnÃ©es: n lignes et sum(vecd) colonnes
     int *n: nombre d'individus
     int *q: nombre de colonnes de la matrice X
-    double *res: contiendra les résultats
+    double *res: contiendra les rÃ©sultats
     double *compt: affichage d'un compteur - si 0 pas de compteur, sinon il faut mettre 
-        \sum_{k=2}^p 2^k N^{-k} \sum_{i=1}^{C_p^k} N^{\sum_{l=1}^k vecd[a_{i,l}]} où A_i=(a_{i,1}, ... , a_{i,k}) est le sous-ensemble (de taille k) de {1,..,p} sélectionné à chaque pas i
+        \sum_{k=2}^p 2^k N^{-k} \sum_{i=1}^{C_p^k} N^{\sum_{l=1}^k vecd[a_{i,l}]} oÃ¹ A_i=(a_{i,1}, ... , a_{i,k}) est le sous-ensemble (de taille k) de {1,..,p} sÃ©lectionnÃ© Ã  chaque pas i
 
 Sorties:
 --------
 
-    Le pointeur modifié est *res. La fonction ne renvoie rien.
+    Le pointeur modifiÃ© est *res. La fonction ne renvoie rien.
 
-Fonctions extérieures appelées:
+Fonctions extÃ©rieures appelÃ©es:
 -------------------------------
 
     combn
@@ -35,9 +35,9 @@ Fonctions extérieures appelées:
 Description:
 ------------
 
-Cette fonction calcule une approximation (due fait des discrétisations données) de ||R_{n,A}|| pour tous les 2^p-p-1 choix de A (cardA>1) possibles.
+Cette fonction calcule une approximation (due fait des discrÃ©tisations donnÃ©es) de ||R_{n,A}|| pour tous les 2^p-p-1 choix de A (cardA>1) possibles.
 
-Références:
+RÃ©fÃ©rences:
 -----------
 
 Exemples:
@@ -52,7 +52,7 @@ N<-5
 vecd.or.p<-c(3,2,6)
 X<-matrix(c(0.7,0.4,0.1,0.8,0.4,0.13,3.7,0.4,2.1,1.8,0.1,0.1,0.7,0.2,0.1,0.45,0.2,0.1,2,3.4,5.6,1.2,0.8,2.6,6.4,1.1,2.2,3.3,4.1,2.5,1.9,2.7,3.5),byrow=F,ncol=11)
 x<-Sys.time();normeRnAwR(X,vecd.or.p,N,compt=0,affiche=1,seriel=0);Sys.time()-x
-#On peut aussi donner un décompte, mais cela rallonge beaucoup le temps de calcul ...
+#On peut aussi donner un dÃ©compte, mais cela rallonge beaucoup le temps de calcul ...
 x<-Sys.time();normeRnAwR(X,vecd.or.p,N,compt=1,affiche=1,seriel=0);Sys.time()-x
 
 
@@ -68,7 +68,7 @@ Equivalent en R:
 normeRnAwRpurR<-function(X,vecd.or.p,N,compt=0,affiche=1) {
 
 if (length(vecd.or.p) > 1) {
-#on fait le cas non sériel
+#on fait le cas non sÃ©riel
 vecd<-vecd.or.p
 
 p<-length(vecd)
@@ -90,8 +90,8 @@ return(resultat)
 
 
 if (length(vecd.or.p)==1) {
-#On fait le cas sériel
-#Attention, on a considéré que n est grand par rapport à p et donc que l'on peut calculer R_{n,A} à la place de S_{n,A}
+#On fait le cas sÃ©riel
+#Attention, on a considÃ©rÃ© que n est grand par rapport Ã  p et donc que l'on peut calculer R_{n,A} Ã  la place de S_{n,A}
 #mais sur la matrice X de taille nprime x nprime ci-dessous
 p<-vecd.or.p
 Y<-X
@@ -131,22 +131,22 @@ return(resultat)
 
 normeRnApurR<-function(X,vecd,N,A,compt){
 #Entrees:
-#X est la matrice des données: n lignes et sum(vecd) colonnes
+#X est la matrice des donnÃ©es: n lignes et sum(vecd) colonnes
 #A est un sous ensemble de {1,...,p}
-#vecd=(d_1,d_2,...,d_p) où les d_j sont des entiers
+#vecd=(d_1,d_2,...,d_p) oÃ¹ les d_j sont des entiers
 #Sorties:
-#Cette fonction calcule, pour un A donné, une approximation (du fait des discrétisations données) de ||R_{n,A}||
+#Cette fonction calcule, pour un A donnÃ©, une approximation (du fait des discrÃ©tisations donnÃ©es) de ||R_{n,A}||
 p<-length(vecd)
 n<-nrow(X)
-#On calcule les points sur les sphères
+#On calcule les points sur les sphÃ¨res
 lesdirections<-directionspurR(N,vecd)
 matrice<-matrix(0,nrow=n,ncol=n)
 #On commence par calculer toutes les permutations des directions possibles s^{(1)},...,s^{(p)}
 resultat<-permutpurR(2*N^(vecd-1))
 globmaxRnA<-c()
-#Ensuite, pour chaque jeu de directions s^{(1)},...,s^{(p)}, on calcule la matrice Psi_A, le vecteur psi_A et le max de R_{n,A} en t comme indiqué par Martin
+#Ensuite, pour chaque jeu de directions s^{(1)},...,s^{(p)}, on calcule la matrice Psi_A, le vecteur psi_A et le max de R_{n,A} en t comme indiquÃ© par Martin
 for (j in 1:nrow(resultat)) {
-#Affichage d'un compteur à l'écran pour savoir où on en est
+#Affichage d'un compteur Ã  l'Ã©cran pour savoir oÃ¹ on en est
 if (compt != 0) {cat(" ",nrow(resultat)-j," ")}
 #Initialisation de la matrice PsiA
 PsiA<-matrix(1,nrow=n,ncol=n)
@@ -159,21 +159,21 @@ debut<-(sum(vecd[1:(k-1)])+1)
 if (k==1) debut<-1
 fin<-(sum(vecd[1:k]))
 for (i in 1:n) {
-#On calcule t_i^{(k)} comme indiqué par Martin
+#On calcule t_i^{(k)} comme indiquÃ© par Martin
 tik<-sum(X[i,debut:fin]*sk)
 for (l in 1:n) {
-#On remplit la matrice n*n comme indiqué par Martin
+#On remplit la matrice n*n comme indiquÃ© par Martin
 matrice[l,i]<-indHpurR(sk,tik,X[l,debut:fin])
 }
 }
-#On multiplie (au fur et à mesure) les |A| matrices n*n obtenues 
+#On multiplie (au fur et Ã  mesure) les |A| matrices n*n obtenues 
 PsiA<-PsiA*scale(matrice,scale=F)
 }
 psiA<-apply(PsiA,FUN=sum,MARGIN=2)
 maxRnA<-max(abs(psiA))/(sqrt(n))
 globmaxRnA<-c(globmaxRnA,maxRnA)
 }
-#Le max global, c'est-à-dire ||R_{n,A}|| si la discretisation est assez fine
+#Le max global, c'est-Ã -dire ||R_{n,A}|| si la discretisation est assez fine
 resultat<-max(globmaxRnA) 
 return(resultat)
 }
@@ -193,11 +193,11 @@ Instructions de compilation pour utilisation depuis R:
 g++ -I/usr/lib/R/include  -I/usr/local/include  -fPIC  -O2 -march=i686 -fomit-frame-pointer -c normeRnAwR.cpp -o normeRnAwR.o
 g++ -shared -L/usr/local/lib -o normeRnAwR.so normeRnAwR.o 
 
-Pour utiliser dans R, taper source("normeRnAwR.R") où le fichier normeRnAwR.R contient le code R suivant:
+Pour utiliser dans R, taper source("normeRnAwR.R") oÃ¹ le fichier normeRnAwR.R contient le code R suivant:
  
 normeRnAwR <- function(X,vecd.or.p,N=10,compt=0,affiche=1) {
 
-#si length(vecd.or.p)>1 alors cas non sériel sinon cas sériel
+#si length(vecd.or.p)>1 alors cas non sÃ©riel sinon cas sÃ©riel
 
 
 
@@ -208,7 +208,7 @@ normeRnAwR <- function(X,vecd.or.p,N=10,compt=0,affiche=1) {
 
 
 if (length(vecd.or.p) > 1) {
-#on fait le cas non sériel
+#on fait le cas non sÃ©riel
 seriel<-0
 vecd<-vecd.or.p
 #Laisser compt=0 si il y a beaucoup de sous-vecteurs ou s'ils sont de trop grande taille
@@ -247,14 +247,14 @@ cat(c("A:",RES[[cardA]][,j],"||R_{n,A}||:",round(out$resultat[nb],3),"\n"))
 }
 }
 }
-#cela renvoie un vecteur de taille 2^p-p-1 contenant la norme de RnA pour chacun des 2^p-p-1 A différents de |A|>1
+#cela renvoie un vecteur de taille 2^p-p-1 contenant la norme de RnA pour chacun des 2^p-p-1 A diffÃ©rents de |A|>1
 return(out$resultat)
 }
 
 
 if (length(vecd.or.p)==1) {
-#On fait le cas sériel
-#Attention, on a considéré que n est grand par rapport à p et donc que l'on peut calculer R_{n,A} à la place de S_{n,A}
+#On fait le cas sÃ©riel
+#Attention, on a considÃ©rÃ© que n est grand par rapport Ã  p et donc que l'on peut calculer R_{n,A} Ã  la place de S_{n,A}
 #mais sur la matrice X de taille nprime x nprime ci-dessous
 seriel<-1
 p<-vecd.or.p
@@ -295,7 +295,7 @@ cat(c("A:",RES[[cardA]][,j],"||R_{n,A}||:",round(out$resultat[nb],3),"\n"))
 }
 }
 }
-#cela renvoie un vecteur de taille 2^(p-1)-1 contenant la norme de RnA pour chacun des 2^p-p-1 A différents de |A|>1 et qui contiennent 1
+#cela renvoie un vecteur de taille 2^(p-1)-1 contenant la norme de RnA pour chacun des 2^p-p-1 A diffÃ©rents de |A|>1 et qui contiennent 1
 return(out$resultat)
 }
 
@@ -310,8 +310,8 @@ return(out$resultat)
 
 permutR<-function(k) {
 
-#Ce programme calcule toutes les permutations du vecteur k=(k_1,...,k_p) où p=length(k)
-#C'est-à-dire tous les vecteurs différents de longueur p depuis (1,...,1) jusqu'à (k_1,...,k_p)
+#Ce programme calcule toutes les permutations du vecteur k=(k_1,...,k_p) oÃ¹ p=length(k)
+#C'est-Ã -dire tous les vecteurs diffÃ©rents de longueur p depuis (1,...,1) jusqu'Ã  (k_1,...,k_p)
 
   x<-matrix(1:k[1],ncol=1)
   for(i in k[-1]) x<-cbind(x[rep(1:nrow(x),rep(i,nrow(x))),],rep(1:i,nrow(x)))
@@ -342,10 +342,10 @@ dyn.load(paste("normeRnAwR", .Platform$dynlib.ext, sep=""))
 
 Menu File/Open source...
 Cliquer sur Load Shared Object Library Symbols
-Sélectionner normeRnAwR.cpp
+SÃ©lectionner normeRnAwR.cpp
 Cliquer sur Open
 Mettre des breakpoints
-Dans la fenêtre Execution Window de R, taper: 
+Dans la fenÃªtre Execution Window de R, taper: 
 
 
 source("normeRnAwR.R")
@@ -365,7 +365,7 @@ Fin des commentaires */
 
 
 
-// Inclusion de librairies et de fonctions extérieures
+// Inclusion de librairies et de fonctions extÃ©rieures
 //----------------------------------------------------
 
 #include <iostream>
@@ -390,7 +390,7 @@ extern "C" {
 
     void normeRnAwR(int *N, int *vecd, int *lenvecd, int *p, double *X, int *n, int *q, double *res, double *compt, int *seriel);
 
-    //Déclaration des variables
+    //DÃ©claration des variables
     int *N;
     int *vecd, *p;
     int *n, nbcol;
@@ -409,26 +409,26 @@ extern "C" {
     seriel=new int[1];
     *(seriel+0)=0;
     N=new int[1];
-    *(N+0)=5;     //N: nombre de points de la discrétisation
+    *(N+0)=5;     //N: nombre de points de la discrÃ©tisation
     p=new int[1];
     *(p+0)=3;     //longueur de vecd
     vecd = new int[*(p+0)];
-    *(vecd+0)=1;     //vecd=(d_1,d_2,...,d_p) où les d_j sont des entiers
+    *(vecd+0)=1;     //vecd=(d_1,d_2,...,d_p) oÃ¹ les d_j sont des entiers
     *(vecd+1)=1;   
     *(vecd+2)=1;   
     n=new int[1];
     *(n+0)=5;
     nbcol=3;
-    X = new double[*(n+0)*nbcol];     //X est la matrice des données: n lignes et sum(vecd)=nbcol colonnes, remplie par colonnes
+    X = new double[*(n+0)*nbcol];     //X est la matrice des donnÃ©es: n lignes et sum(vecd)=nbcol colonnes, remplie par colonnes
     *(X+0)=0.7;*(X+1)=0.4;*(X+2)=0.1;*(X+3)=0.8;*(X+4)=0.4;*(X+5)=0.13;
     *(X+6)=3.7;*(X+7)=0.4;*(X+8)=2.1;*(X+9)=1.8;
     *(X+10)=0.1;*(X+11)=0.1;*(X+12)=0.7;*(X+13)=0.2;*(X+14)=0.1;    
     res=new double[(int)pow(2.0,*(p+0))-*(p+0)-1];
     for (i = 1; i <= ((int)pow(2.0,*(p+0))-*(p+0)-1); i ++) *(res+i-1)=999999;
     compt=new double[1];
-    //Si on met compt à 0, alors le décompte n'est pas affiché, sinon il faut mettre la valeur suivante:
-    // *(compt+0)=\sum_{k=2}^p 2^k N^{-k} \sum_{i=1}^{C_p^k} N^{\sum_{l=1}^k vecd[a_{i,l}]} où A_i=(a_{i,1}, ... , a_{i,k}) est le sous-ensemble (de taille k) de {1,..,p} sélectionné 
-    // à chaque pas i.
+    //Si on met compt Ã  0, alors le dÃ©compte n'est pas affichÃ©, sinon il faut mettre la valeur suivante:
+    // *(compt+0)=\sum_{k=2}^p 2^k N^{-k} \sum_{i=1}^{C_p^k} N^{\sum_{l=1}^k vecd[a_{i,l}]} oÃ¹ A_i=(a_{i,1}, ... , a_{i,k}) est le sous-ensemble (de taille k) de {1,..,p} sÃ©lectionnÃ© 
+    // Ã  chaque pas i.
     *(compt+0)=0;
     numero=0;
     cardApoint = new int[1];
@@ -437,8 +437,8 @@ extern "C" {
     //Appel de la fonction
     normeRnAwR(N, vecd, p, X, n, res, compt,seriel);
 
-    //Affichage des résultats
-    cout << "\nVecteur des maximum pour les différents A (pour |A| croissant et à |A| fixé pour la permutation croissante (par ordre lexicographique)):\n";
+    //Affichage des rÃ©sultats
+    cout << "\nVecteur des maximum pour les diffÃ©rents A (pour |A| croissant et Ã  |A| fixÃ© pour la permutation croissante (par ordre lexicographique)):\n";
     cout << "\n";
 
     
@@ -455,18 +455,18 @@ extern "C" {
 
       *(cardApoint+0)=cardA;
 
-      // combmat va contenir toutes les permutations de 1:p de taille cardA, c'est-à-dire tous les ensembles A de taille |A|
+      // combmat va contenir toutes les permutations de 1:p de taille cardA, c'est-Ã -dire tous les ensembles A de taille |A|
       combn(combmat, p, cardApoint);
       
 
-      // Pour chaque valeur de cardA, il y a Cp,cardA façons de choisir un ensemble de taille cardA parmi p valeurs
-      // On va fixer A, pour |A| donné
+      // Pour chaque valeur de cardA, il y a Cp,cardA faÃ§ons de choisir un ensemble de taille cardA parmi p valeurs
+      // On va fixer A, pour |A| donnÃ©
             for (i = 1; i<=CpcardA; i++) {	
 
 	numero=numero+1;
 	
 
-	// A est un sous ensemble (de taille cardA) qui contient la ième permutation de 1:p de taille cardA. C'est le i-ème ensemble A de taille |A|
+	// A est un sous ensemble (de taille cardA) qui contient la iÃ¨me permutation de 1:p de taille cardA. C'est le i-Ã¨me ensemble A de taille |A|
 	cout << "A= ";
 
 			for (j=1; j<=cardA; j++) {
@@ -487,7 +487,7 @@ extern "C" {
       
       
 
-	//On libère de la mémoire
+	//On libÃ¨re de la mÃ©moire
       delete[] combmat;
       
 
@@ -518,7 +518,7 @@ extern "C" {
 
  
  
-    //Déclaration des variables
+    //DÃ©claration des variables
     int taille;
     if (*(seriel+0) == 0) {
       taille=(int)pow(2.0,(double)*(p+0))-*(p+0)-1;
@@ -585,7 +585,7 @@ extern "C" {
 	    for (i = 1; i <= nprime; i++) {
 
 	      	      *(newX+(j-1)*nprime**(q+0)+(k-1)*nprime+i-1)=*(X+(k-1)*(*n+0)+i+j-1-1);
-		      //a bien vérifier: on stocke une matrice à n lignes dans une matrice à nprime lignes: c'est bon??
+		      //a bien vÃ©rifier: on stocke une matrice Ã  n lignes dans une matrice Ã  nprime lignes: c'est bon??
 	      
 	  }
 	}
@@ -633,7 +633,7 @@ extern "C" {
 
 
 
-    // Discrétisations de l'espace paramétrique (0,pi)^{d-2} x (0,2pi) de la sphère R^d: (O,pi) en N et (0,2*pi) 2*N points respectivement
+    // DiscrÃ©tisations de l'espace paramÃ©trique (0,pi)^{d-2} x (0,2pi) de la sphÃ¨re R^d: (O,pi) en N et (0,2*pi) 2*N points respectivement
     for (i = 1; i <= *(N+0); i++) {
       *(discretization1+i-1)=i*pi/(*(N+0)+1);
       *(discretization2+i-1)=i*pi/(*(N+0)+1);
@@ -646,7 +646,7 @@ extern "C" {
     
 
     // On va calculer ||R_{n,A}|| pour chaque sous-ensemble A de {1,...,p} de |A|>1, et ceci par valeurs de |A| croissantes
-    // Il faudra distinguer le cas sériel du cas non sériel. Dans le cas sériel, on ne prendra que les A qui contiennent 1.   
+    // Il faudra distinguer le cas sÃ©riel du cas non sÃ©riel. Dans le cas sÃ©riel, on ne prendra que les A qui contiennent 1.   
     // On fixe |A|
     for (cardA=2; cardA<=*(p+0); cardA++) { 
       
@@ -666,30 +666,30 @@ extern "C" {
       combmat=new int[*(cardApoint+0)*CpcardA];
       for (i = 1; i<= *(cardApoint+0)*CpcardA; i++) *(combmat+i-1)=999999;
 
-      //combmat va contenir toutes les permutations de 1:ppoint de taille cardApoint (matrice de taille cardApoint x Cppoint,cardApoint, c'est-à-dire tous les ensembles A de taille cardApoint
+      //combmat va contenir toutes les permutations de 1:ppoint de taille cardApoint (matrice de taille cardApoint x Cppoint,cardApoint, c'est-Ã -dire tous les ensembles A de taille cardApoint
       combn(combmat, ppoint, cardApoint);
 
-      // On réinitialise A
+      // On rÃ©initialise A
       A = new int[cardA];
       for (i = 1; i <= cardA; i++) *(A+i-1)=999999;	
-      // On réinitialise permvecd et limit
+      // On rÃ©initialise permvecd et limit
       permvecd = new double[cardA];
       for (i = 1; i <= cardA; i++) *(permvecd+i-1)=999999;	
       limit = new double[cardA];
       for (i = 1; i <= cardA; i++) *(permvecd+i-1)=999999;	
 	    
-      // Pour chaque valeur de cardA, il y a Cp,cardA façons de choisir un ensemble de taille cardA parmi p valeurs
-      // On va fixer A, pour |A| donné. i est donc l'indice de colonne de la matrice combmat
+      // Pour chaque valeur de cardA, il y a Cp,cardA faÃ§ons de choisir un ensemble de taille cardA parmi p valeurs
+      // On va fixer A, pour |A| donnÃ©. i est donc l'indice de colonne de la matrice combmat
       for (i = 1; i<=CpcardA; i++) {	
 
 	numero=numero+1;
 
 	if (*(seriel+0) == 0) {
-	// A est un sous ensemble (de taille cardA) qui contient la ième permutation de 1:p de taille cardA. C'est le i-ème ensemble A de taille |A|
+	// A est un sous ensemble (de taille cardA) qui contient la iÃ¨me permutation de 1:p de taille cardA. C'est le i-Ã¨me ensemble A de taille |A|
 	for (j=1; j<=cardA; j++) *(A+j-1)=*(combmat+(i-1)**(cardApoint+0)+j-1); // j est l'indice de ligne de la matrice combmat
 	}
 	if (*(seriel+0) == 1) {
-	// A est un sous ensemble (de taille cardA) qui contient la ième permutation de 1:p de taille cardA qui contient 1. C'est le i-ème ensemble A de taille |A|
+	// A est un sous ensemble (de taille cardA) qui contient la iÃ¨me permutation de 1:p de taille cardA qui contient 1. C'est le i-Ã¨me ensemble A de taille |A|
 	  *(A+0)=1;
 	  for (j=2; j<=cardA; j++) *(A+j-1)=*(combmat+(i-1)**(cardApoint+0)+j-2)+1; // j est l'indice de ligne de la matrice combmat
 	}
@@ -698,51 +698,51 @@ extern "C" {
 	  *(limit+j-1)=2*(int)pow((double)*(N+0),*(vecd+*(A+j-1)-1)-1.0);
 	}
 	
-	// A chaque passage dans la boucle while, *(permvecd+0), ..., *(permvecd+cardA-1) correspondra à une nouvelle permutation du vecteur (2*N^(vecd[A]-1))
-	// Par exemple, si A={1,3,6} alors les permutations iront de (1,1,1) jusquà (2*N^{d_1-1},2*N^{d_3-1},2*N^{d_6-1})
-	// Ainsi, si la permutation est (1,54,7) cela signifie que l'on prend le point 1 sur la sphère R^{d_1}, le point 54 sur la sphère R^{d_3} et le point 7 sur la sphère R^{d_6}
+	// A chaque passage dans la boucle while, *(permvecd+0), ..., *(permvecd+cardA-1) correspondra Ã  une nouvelle permutation du vecteur (2*N^(vecd[A]-1))
+	// Par exemple, si A={1,3,6} alors les permutations iront de (1,1,1) jusquÃ  (2*N^{d_1-1},2*N^{d_3-1},2*N^{d_6-1})
+	// Ainsi, si la permutation est (1,54,7) cela signifie que l'on prend le point 1 sur la sphÃ¨re R^{d_1}, le point 54 sur la sphÃ¨re R^{d_3} et le point 7 sur la sphÃ¨re R^{d_6}
 	while (1) {
 	  
 
 	  for (j = 1; j<= *(nbis+0)**(nbis+0); j++) *(PsiA+j-1)=1.0;
 	  
 	 
-	  //Affichage d'un compteur à l'écran
+	  //Affichage d'un compteur Ã  l'Ã©cran
 	  //	  if (*(compt+0) != 0) {*(compt+0)=*(compt+0)-1; cout << "\n" << *(compt+0);}
 
 	  
-	  // Pour chaque k dans A (for k = 1; k<= cardA; k++), on calcule la permutation associée à x=*(permvecd+cardA-k) en utilisant l'équivalent C++ de 
+	  // Pour chaque k dans A (for k = 1; k<= cardA; k++), on calcule la permutation associÃ©e Ã  x=*(permvecd+cardA-k) en utilisant l'Ã©quivalent C++ de 
 	  // mon programme decomposition.R
-	  // puis, pour cette permutation, on calcule le vecteur sk=s^{(k)} associé comme c'est fait dans le programme directions, c'est-à-dire qu'on pioche dans discretization1 et 2, 
-	  // et on transforme en cordonnées cartésiennes. Ensuite, on calcule RnA.
+	  // puis, pour cette permutation, on calcule le vecteur sk=s^{(k)} associÃ© comme c'est fait dans le programme directions, c'est-Ã -dire qu'on pioche dans discretization1 et 2, 
+	  // et on transforme en cordonnÃ©es cartÃ©siennes. Ensuite, on calcule RnA.
 	  // Par exemple, si discretization1=(alpha_1,...,alpha_N) et discretization2=(beta_1,...,beta_{2N})
-	  // alors la ligne (1,2,1,...,3,4) (permutation associée à x) de longueur d_k-2+1=d_k-1 correspondra au choix des angles (alpha_1,alpha_2,alpha_1,...,alpha_3,beta_4)
+	  // alors la ligne (1,2,1,...,3,4) (permutation associÃ©e Ã  x) de longueur d_k-2+1=d_k-1 correspondra au choix des angles (alpha_1,alpha_2,alpha_1,...,alpha_3,beta_4)
 	  for (k = 1; k<= cardA; k++) {
 
 	    decomp = new int[*(vecd+*(A+k-1)-1)-1];
 	    for ( jj = 1;  jj <= (*(vecd+*(A+k-1)-1)-1); jj++) *(decomp+jj-1)=999999;
 
-	    //x est le numéro de la permutation pour s^{(k)}. La valeur maximale de x est 2*N^(vecd[A[k]]-1). Note: 2^32-2*50^(7-1) < 0.
-	    // Par exemple, le point x=54 sur la sphère R^{d_3} correspondra (si d_3=4 et N=50) au choix (alpha=1,alpha=2,beta=4)
+	    //x est le numÃ©ro de la permutation pour s^{(k)}. La valeur maximale de x est 2*N^(vecd[A[k]]-1). Note: 2^32-2*50^(7-1) < 0.
+	    // Par exemple, le point x=54 sur la sphÃ¨re R^{d_3} correspondra (si d_3=4 et N=50) au choix (alpha=1,alpha=2,beta=4)
 	    x = *(permvecd+k-1);
 
 
-	    //Cas où d_i=1, il n'y a que deux points possibles sur la sphère dans R^1: matrice à 2 lignes et une colonne
+	    //Cas oÃ¹ d_i=1, il n'y a que deux points possibles sur la sphÃ¨re dans R^1: matrice Ã  2 lignes et une colonne
 	    if (*(vecd+*(A+k-1)-1)== 1) {
 	      if ( (int)x == 1)   *(sk+0) = -1.0;
 	      if ( (int)x == 2)   *(sk+0) = 1.0;
 	    }
 	
-	    //Cas où d_i=2, c'est-à-dire sur un cercle: matrice à 2*N lignes et 2 colonnes
+	    //Cas oÃ¹ d_i=2, c'est-Ã -dire sur un cercle: matrice Ã  2*N lignes et 2 colonnes
 	    if (*(vecd+*(A+k-1)-1) == 2) {
 	      *(sk+0) = cos(*(discretization2+(int)x-1));
 	      *(sk+1) = sin(*(discretization2+(int)x-1));
 	    }
 	    
-	    //Cas où d_i>2
+	    //Cas oÃ¹ d_i>2
 	    if (*(vecd+*(A+k-1)-1) > 2) {
 	      
-	      //on calcule la permutation associée à x=*(permvecd+cardA-k) en utilisant l'équivalent C++ de mon programme decomposition.R, Elle doit être de longueur d_k-1
+	      //on calcule la permutation associÃ©e Ã  x=*(permvecd+cardA-k) en utilisant l'Ã©quivalent C++ de mon programme decomposition.R, Elle doit Ãªtre de longueur d_k-1
 	      for (j = 1; j <= *(vecd+*(A+k-1)-1)-1; j++) {
 		produit = pow((double)*(N+0),(double)*(vecd+*(A+k-1)-1)-1-j)*2**(N+0);
 		quotient = (int)floor(x/produit);
@@ -754,14 +754,14 @@ extern "C" {
 		*(decomp+j-1)=quotient+1;
 		x = reste;
 	      }
-	      // *(decomp+0), ..., *(decomp+*(vecd+*(A+k-1)-1)-2) correspond à la permutation (de longueur d_k-1) associée à x. Cela permettra de choisir  
-	      // le x-ème vecteur s^{(k)} sur la sphère R^{d_k} en coordonnées sphériques
+	      // *(decomp+0), ..., *(decomp+*(vecd+*(A+k-1)-1)-2) correspond Ã  la permutation (de longueur d_k-1) associÃ©e Ã  x. Cela permettra de choisir  
+	      // le x-Ã¨me vecteur s^{(k)} sur la sphÃ¨re R^{d_k} en coordonnÃ©es sphÃ©riques
 	      for (j = 1; j <= (*(vecd+*(A+k-1)-1)-2); j++) {
 		*(decomp+j-1) = *(decomp+j);
 	      }
 	      *(decomp+*(vecd+*(A+k-1)-1)-2) = (int)reste;
 	  
-	      // On passe maintenant en coordonnées cartésiennes (s^{(k)}=(x_1,...,x_{d_A[k]}). Voir le livre de Martin p.32
+	      // On passe maintenant en coordonnÃ©es cartÃ©siennes (s^{(k)}=(x_1,...,x_{d_A[k]}). Voir le livre de Martin p.32
 	      *(sk+0)=cos(*(discretization1+*(decomp+0)-1)); // c'est x_1 (le x_n du livre de Martin)
 	      
 	      for (l = 2; l <= (*(vecd+*(A+k-1)-1)-1); l++) {
@@ -781,10 +781,10 @@ extern "C" {
 	      *(sk+*(vecd+*(A+k-1)-1)-1) = prod*sin(*(discretization2+*(decomp+*(vecd+*(A+k-1)-1)-2)-1)); // c'est x_{d_A[k]} (le x_1 du livre de Martin)
 	      
 	      
-	    } // fin du Cas où d_i>2
+	    } // fin du Cas oÃ¹ d_i>2
 	    
 
-	    // Création des indices de début et de fin de colonnes pour extraire les données dans X 
+	    // CrÃ©ation des indices de dÃ©but et de fin de colonnes pour extraire les donnÃ©es dans X 
 	debut=0;
 	if (*(A+k-1)==1) {debut=1;
 	fin=*(vecd+0);
@@ -803,7 +803,7 @@ extern "C" {
 	//indice de ligne	
 	for (ii=1; ii<=*(nbis+0); ii++) {
 	  
-	  //On calcule t_i^{(k)} comme indiqué par Martin "For s^{(k)}, evaluate the n values <X_i^k,s^k>=t_i^k"
+	  //On calcule t_i^{(k)} comme indiquÃ© par Martin "For s^{(k)}, evaluate the n values <X_i^k,s^k>=t_i^k"
 	  tik=0;
 	  for (j=1; j<=(fin-debut+1); j++) tik=tik+*(newX+(debut+j-2)**(nbis+0)+ii-1)**(sk+j-1);
 	  
@@ -822,7 +822,7 @@ extern "C" {
 	    if (somme <= 0) ind=1;
 	    
 	    
-	    // On remplit la matrice n*n comme indiqué par Martin, ligne l, colonne ii
+	    // On remplit la matrice n*n comme indiquÃ© par Martin, ligne l, colonne ii
 	    // The n x n matrix for s^k has an element in position (i,j) given by Ind{<X_i^k,s^k> \leq t_j^k}
 	    *(matrice+(ii-1)**(nbis+0)+l-1)=ind;
 	    
@@ -833,7 +833,7 @@ extern "C" {
 	  
 	  
 	  
-	  //On multiplie terme à terme (au fur et à mesure) les |A| matrices n*n obtenues. Il ne s'agit pas d'un produit matriciel mais d'un produit terme à terme.
+	  //On multiplie terme Ã  terme (au fur et Ã  mesure) les |A| matrices n*n obtenues. Il ne s'agit pas d'un produit matriciel mais d'un produit terme Ã  terme.
 	  //For a given subset A, one multiplies together the appropriate |A| such matrices to obtain an n x n matrix Psi (say)
 	  for (l=1; l<=*(nbis+0); l++) *(PsiA+(ii-1)**(nbis+0)+l-1)=*(PsiA+(ii-1)**(nbis+0)+l-1)*(*(matrice+(ii-1)**(nbis+0)+l-1)-moyennecoli/(*(nbis+0)));
 	  
@@ -843,7 +843,7 @@ extern "C" {
 	delete[] decomp;
 	
       } // fin de for (k=1; k<=cardA; k++)
-	  //A ce stade, la matrice PsiA est créée
+	  //A ce stade, la matrice PsiA est crÃ©Ã©e
       
 
 	  // A vector psiA is then obtained by adding the rows of PsiA (i.e. psiA<-apply(PsiA,FUN=sum,MARGIN=2)). 
@@ -875,7 +875,7 @@ extern "C" {
 	
       } // fin de for i = 1 to CpcardA
       
-	//On libère de la mémoire
+	//On libÃ¨re de la mÃ©moire
       delete[] limit;
       delete[] permvecd;
       delete[] A;
@@ -885,7 +885,7 @@ extern "C" {
     
 
 
-    //On modifie le pointeur d'entrée pour renvoyer les résultats
+    //On modifie le pointeur d'entrÃ©e pour renvoyer les rÃ©sultats
     for (g=1; g<=taille; g++)   *(res+g-1)=*(maxRnA+g-1);
 
     

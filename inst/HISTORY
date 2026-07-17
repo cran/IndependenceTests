@@ -61,3 +61,33 @@ Version 0.7:
 - Updated Date field in DESCRIPTION
 - Updated version to 0.7 (previous CRAN version was 0.5, archived 2021-03-01)
 - modified the file A-dep-tests.R (and associated file A-dep-tests.Rd) by adding (and using) a function print.A.dep.tests(), declared in NAMESPACE.
+
+2026-07-16
+----------
+Version 0.8:
+- converts the following files from Latin-1 to valid UTF-8
+  src/dependogram.cpp
+  src/others/normeRnAwR.cpp
+  src/others/combn.cpp
+  src/others/Cnp.cpp
+- I modified entirely the file src/myzhpevx.cpp to solve LTO issues
+- I modified all these files below, replacing COMPLEX*16 and DOUBLE COMPLEX with COMPLEX(KIND(0D0)), and modified a few other things too:
+src/zhpevx.f
+src/othersfortran/ilazlc.f
+src/othersfortran/ilazlr.f
+src/othersfortran/zhptrd.f
+src/othersfortran/zladiv.f
+src/othersfortran/zlanhp.f
+src/othersfortran/zlarf.f
+src/othersfortran/zlarfg.f
+src/othersfortran/zlaset.f
+src/othersfortran/zlasr.f
+src/othersfortran/zlassq.f
+src/othersfortran/zstein.f
+src/othersfortran/zsteqr.f
+src/othersfortran/zung2l.f
+src/othersfortran/zung2r.f
+src/othersfortran/zupgtr.f
+src/othersfortran/zupmtr.f
+
+ 

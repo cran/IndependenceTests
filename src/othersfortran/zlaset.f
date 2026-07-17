@@ -114,10 +114,10 @@
 *     .. Scalar Arguments ..
       CHARACTER          UPLO
       INTEGER            LDA, M, N
-      DOUBLE COMPLEX         ALPHA, BETA
+      COMPLEX(KIND(0D0))         ALPHA, BETA
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         A( LDA, * )
+      COMPLEX(KIND(0D0))         A( LDA, * )
 *     ..
 *
 *  =====================================================================

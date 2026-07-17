@@ -194,13 +194,13 @@
       INTEGER            IBLOCK( * ), IFAIL( * ), ISPLIT( * ),
      $                   IWORK( * )
       DOUBLE PRECISION   D( * ), E( * ), W( * ), WORK( * )
-      DOUBLE COMPLEX         Z( LDZ, * )
+      COMPLEX(KIND(0D0))         Z( LDZ, * )
 *     ..
 *
 * =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE COMPLEX         CZERO, CONE
+      COMPLEX(KIND(0D0))         CZERO, CONE
       PARAMETER          ( CZERO = ( 0.0D+0, 0.0D+0 ),
      $                   CONE = ( 1.0D+0, 0.0D+0 ) )
       DOUBLE PRECISION   ZERO, ONE, TEN, ODM3, ODM1
@@ -228,7 +228,7 @@
       EXTERNAL           DCOPY, DLAGTF, DLAGTS, DLARNV, DSCAL, XERBLA
 *     ..
 *     .. Intrinsic Functions ..
-      INTRINSIC          ABS, DBLE, DCMPLX, MAX, SQRT
+      INTRINSIC          ABS, DBLE, CMPLX, MAX, SQRT
 *     ..
 *     .. Executable Statements ..
 *
@@ -450,7 +450,8 @@
                Z( I, J ) = CZERO
   150       CONTINUE
             DO 160 I = 1, BLKSIZ
-               Z( B1+I-1, J ) = DCMPLX( WORK( INDRV1+I ), ZERO )
+               Z( B1+I-1, J ) = CMPLX( WORK( INDRV1+I ), 
+     $              ZERO, KIND(0D0) )
   160       CONTINUE
 *
 *           Save the shift to check eigenvalue spacing at next

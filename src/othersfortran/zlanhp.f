@@ -128,7 +128,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   WORK( * )
-      DOUBLE COMPLEX         AP( * )
+      COMPLEX(KIND(0D0))         AP( * )
 *     ..
 *
 * =====================================================================

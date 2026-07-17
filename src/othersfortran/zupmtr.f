@@ -160,19 +160,20 @@
       INTEGER            INFO, LDC, M, N
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         AP( * ), C( LDC, * ), TAU( * ), WORK( * )
+      COMPLEX(KIND(0D0)) AP( * ), C( LDC, * ), TAU( * )
+      COMPLEX(KIND(0D0)) WORK( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE COMPLEX         ONE
+      COMPLEX(KIND(0D0))         ONE
       PARAMETER          ( ONE = ( 1.0D+0, 0.0D+0 ) )
 *     ..
 *     .. Local Scalars ..
       LOGICAL            FORWRD, LEFT, NOTRAN, UPPER
       INTEGER            I, I1, I2, I3, IC, II, JC, MI, NI, NQ
-      DOUBLE COMPLEX         AII, TAUI
+      COMPLEX(KIND(0D0))         AII, TAUI
 *     ..
 *     .. External Functions ..
       LOGICAL            LSAME
@@ -182,7 +183,7 @@
       EXTERNAL           XERBLA, ZLARF
 *     ..
 *     .. Intrinsic Functions ..
-      INTRINSIC          DCONJG, MAX
+      INTRINSIC          CONJG, MAX
 *     ..
 *     .. Executable Statements ..
 *
@@ -266,7 +267,7 @@
             IF( NOTRAN ) THEN
                TAUI = TAU( I )
             ELSE
-               TAUI = DCONJG( TAU( I ) )
+               TAUI = CONJG( TAU( I ) )
             END IF
             AII = AP( II )
             AP( II ) = ONE
@@ -329,7 +330,7 @@
             IF( NOTRAN ) THEN
                TAUI = TAU( I )
             ELSE
-               TAUI = DCONJG( TAU( I ) )
+               TAUI = CONJG( TAU( I ) )
             END IF
             CALL ZLARF( SIDE, MI, NI, AP( II ), 1, TAUI, C( IC, JC ),
      $                  LDC, WORK )

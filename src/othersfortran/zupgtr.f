@@ -124,13 +124,14 @@
       INTEGER            INFO, LDQ, N
 *     ..
 *     .. Array Arguments ..
-      DOUBLE COMPLEX         AP( * ), Q( LDQ, * ), TAU( * ), WORK( * )
+      COMPLEX(KIND(0D0)) AP( * ), Q( LDQ, * ), TAU( * )
+      COMPLEX(KIND(0D0)) WORK( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE COMPLEX         CZERO, CONE
+      COMPLEX(KIND(0D0))         CZERO, CONE
       PARAMETER          ( CZERO = ( 0.0D+0, 0.0D+0 ),
      $                   CONE = ( 1.0D+0, 0.0D+0 ) )
 *     ..

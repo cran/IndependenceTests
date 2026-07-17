@@ -143,7 +143,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   D( * ), E( * ), WORK( * )
-      DOUBLE COMPLEX         Z( LDZ, * )
+      COMPLEX(KIND(0D0))         Z( LDZ, * )
 *     ..
 *
 *  =====================================================================
@@ -152,7 +152,7 @@
       DOUBLE PRECISION   ZERO, ONE, TWO, THREE
       PARAMETER          ( ZERO = 0.0D0, ONE = 1.0D0, TWO = 2.0D0,
      $                   THREE = 3.0D0 )
-      DOUBLE COMPLEX         CZERO, CONE
+      COMPLEX(KIND(0D0))         CZERO, CONE
       PARAMETER          ( CZERO = ( 0.0D0, 0.0D0 ),
      $                   CONE = ( 1.0D0, 0.0D0 ) )
       INTEGER            MAXIT

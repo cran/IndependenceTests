@@ -3,7 +3,7 @@
 Nom de la fonction: Cnp
 -------------------
 
-Entrées:
+EntrÃ©es:
 --------
 
  int n et int k
@@ -13,12 +13,12 @@ Sorties:
 
  Returns the binomial coefficient Cnk as a double number.
 
-Fonctions extérieures appelées:
+Fonctions extÃ©rieures appelÃ©es:
 -------------------------------
 
 gammln, factrl, factln, 
 
-Références:
+RÃ©fÃ©rences:
 -----------
 Numerical recipies in C chapter 6.1
 

@@ -162,13 +162,13 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   D( * ), E( * )
-      DOUBLE COMPLEX         AP( * ), TAU( * )
+      COMPLEX(KIND(0D0))         AP( * ), TAU( * )
 *     ..
 *
 *  =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE COMPLEX         ONE, ZERO, HALF
+      COMPLEX(KIND(0D0))         ONE, ZERO, HALF
       PARAMETER          ( ONE = ( 1.0D+0, 0.0D+0 ),
      $                   ZERO = ( 0.0D+0, 0.0D+0 ),
      $                   HALF = ( 0.5D+0, 0.0D+0 ) )
@@ -176,14 +176,14 @@
 *     .. Local Scalars ..
       LOGICAL            UPPER
       INTEGER            I, I1, I1I1, II
-      DOUBLE COMPLEX         ALPHA, TAUI
+      COMPLEX(KIND(0D0))         ALPHA, TAUI
 *     ..
 *     .. External Subroutines ..
       EXTERNAL           XERBLA, ZAXPY, ZHPMV, ZHPR2, ZLARFG
 *     ..
 *     .. External Functions ..
       LOGICAL            LSAME
-      DOUBLE COMPLEX         ZDOTC
+      COMPLEX(KIND(0D0))         ZDOTC
       EXTERNAL           LSAME, ZDOTC
 *     ..
 *     .. Intrinsic Functions ..
